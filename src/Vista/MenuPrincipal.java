@@ -1,9 +1,9 @@
 
 package Vista;
 
-public class IMenuPrincipal extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {
 
-    public IMenuPrincipal() {
+    public MenuPrincipal() {
         initComponents();
     }
 
@@ -141,31 +141,31 @@ public class IMenuPrincipal extends javax.swing.JFrame {
     private void btnRegistrarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAlumnoActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IRegistrarAlumno().setVisible(true);
+        new RegistrarAlumno().setVisible(true);
     }//GEN-LAST:event_btnRegistrarAlumnoActionPerformed
 
     private void btnPrestamoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestamoLibroActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IPrestamosLibros().setVisible(true);
+        new PrestamosLibros().setVisible(true);
     }//GEN-LAST:event_btnPrestamoLibroActionPerformed
 
     private void btnRegistrarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLibroActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IRegistroLibros().setVisible(true);
+        new RegistroLibros().setVisible(true);
     }//GEN-LAST:event_btnRegistrarLibroActionPerformed
 
     private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IBuscarLibros().setVisible(true);
+        new BuscarLibros().setVisible(true);
     }//GEN-LAST:event_btnBuscarLibroActionPerformed
 
     private void btnDevolucionLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionLibroActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IDevolucionLibros().setVisible(true);
+        new DevolucionLibros().setVisible(true);
     }//GEN-LAST:event_btnDevolucionLibroActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -190,31 +190,32 @@ public class IMenuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IMenuPrincipal().setVisible(true);
+                new MenuPrincipal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarLibro;
-    private javax.swing.JButton btnDevolucionLibro;
-    private javax.swing.JButton btnPrestamoLibro;
-    private javax.swing.JButton btnRegistrarAlumno;
-    private javax.swing.JButton btnRegistrarLibro;
-    private javax.swing.JButton btnSalir;
+    public javax.swing.JButton btnBuscarLibro;
+    public javax.swing.JButton btnDevolucionLibro;
+    public javax.swing.JButton btnPrestamoLibro;
+    public javax.swing.JButton btnRegistrarAlumno;
+    public javax.swing.JButton btnRegistrarLibro;
+    public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

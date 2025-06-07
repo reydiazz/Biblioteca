@@ -1,9 +1,9 @@
 
 package Vista;
 
-public class IRegistrarAlumno extends javax.swing.JFrame {
+public class RegistrarAlumno extends javax.swing.JFrame {
 
-    public IRegistrarAlumno() {
+    public RegistrarAlumno() {
         initComponents();
     }
 
@@ -228,7 +228,7 @@ public class IRegistrarAlumno extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IMenuPrincipal().setVisible(true);
+        new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelActionPerformed
@@ -237,8 +237,8 @@ public class IRegistrarAlumno extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton btnRegresar;
+    public javax.swing.JButton btnRegistrar;
+    public javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -247,11 +247,11 @@ public class IRegistrarAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtGrado;
-    private javax.swing.JTextField txtNivel;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtSeccion;
+    public javax.swing.JTextField txtApellido;
+    public javax.swing.JTextField txtCodigo;
+    public javax.swing.JTextField txtGrado;
+    public javax.swing.JTextField txtNivel;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtSeccion;
     // End of variables declaration//GEN-END:variables
 }

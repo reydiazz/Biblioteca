@@ -1,9 +1,9 @@
 
 package Vista;
 
-public class IPrestamosLibros extends javax.swing.JFrame {
+public class PrestamosLibros extends javax.swing.JFrame {
 
-    public IPrestamosLibros() {
+    public PrestamosLibros() {
         initComponents();
     }
 
@@ -254,7 +254,7 @@ public class IPrestamosLibros extends javax.swing.JFrame {
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IMenuPrincipal().setVisible(true);
+        new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_btnRegresar1ActionPerformed
 
     /**
@@ -263,9 +263,9 @@ public class IPrestamosLibros extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarPrestamo;
-    private javax.swing.JButton btnPrestamoLibro;
-    private javax.swing.JButton btnRegresar1;
+    public javax.swing.JButton btnBuscarPrestamo;
+    public javax.swing.JButton btnPrestamoLibro;
+    public javax.swing.JButton btnRegresar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -274,13 +274,13 @@ public class IPrestamosLibros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
+    public javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtCodigoAlumnoBuscar;
-    private javax.swing.JTextField txtCodigoAlumnoPrestamo;
-    private javax.swing.JTextField txtCodigoLibroPrestamo;
-    private javax.swing.JTextField txtDiasRestantes;
-    private javax.swing.JTextField txtFechaDevolucion;
-    private javax.swing.JTextField txtFechaPrestamo;
+    public javax.swing.JTextField txtCodigoAlumnoBuscar;
+    public javax.swing.JTextField txtCodigoAlumnoPrestamo;
+    public javax.swing.JTextField txtCodigoLibroPrestamo;
+    public javax.swing.JTextField txtDiasRestantes;
+    public javax.swing.JTextField txtFechaDevolucion;
+    public javax.swing.JTextField txtFechaPrestamo;
     // End of variables declaration//GEN-END:variables
 }

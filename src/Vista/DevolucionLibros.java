@@ -8,12 +8,12 @@ package Vista;
  *
  * @author Diego
  */
-public class IDevolucionLibros extends javax.swing.JFrame {
+public class DevolucionLibros extends javax.swing.JFrame {
 
     /**
      * Creates new form IDevolucionLibros
      */
-    public IDevolucionLibros() {
+    public DevolucionLibros() {
         initComponents();
     }
 
@@ -101,10 +101,10 @@ public class IDevolucionLibros extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(106, 106, 106)
+                                .addGap(94, 94, 94)
                                 .addComponent(btnDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel9))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(145, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(28, 28, 28)
@@ -131,15 +131,16 @@ public class IDevolucionLibros extends javax.swing.JFrame {
                     .addComponent(txtCodigoAlumnoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
+                .addComponent(jLabel9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
                         .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(37, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGap(167, 167, 167))))
         );
 
         pack();
@@ -148,7 +149,7 @@ public class IDevolucionLibros extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new IMenuPrincipal().setVisible(true);
+        new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtCodigoAlumnoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoBuscarActionPerformed
@@ -169,14 +170,14 @@ public class IDevolucionLibros extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarDevolucion;
-    private javax.swing.JButton btnDevolverLibro;
-    private javax.swing.JButton btnRegresar;
+    public javax.swing.JButton btnBuscarDevolucion;
+    private volatile javax.swing.JButton btnDevolverLibro;
+    public javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblLibros;
-    private javax.swing.JTextField txtCodigoAlumnoBuscar;
+    public javax.swing.JTable tblLibros;
+    public javax.swing.JTextField txtCodigoAlumnoBuscar;
     // End of variables declaration//GEN-END:variables
 }
