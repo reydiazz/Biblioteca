@@ -1,7 +1,6 @@
 
 package Modelo;
 
-
 public class Libro {
     private long codigoLibro;
     private String titulo;
