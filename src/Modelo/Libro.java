@@ -1,16 +1,15 @@
 
 package Modelo;
 
-
 public class Libro {
-    private long codigoLibro;
+    private String codigoLibro;
     private String titulo;
     private String autor;
     private String genero;
     private int numeroCopias;
     private String edicion;
 
-    public Libro(long codigoLibro, String titulo, String autor, String genero, int numeroCopias, String edicion) {
+    public Libro(String codigoLibro, String titulo, String autor, String genero, int numeroCopias, String edicion) {
         this.codigoLibro = codigoLibro;
         this.titulo = titulo;
         this.autor = autor;
@@ -19,11 +18,11 @@ public class Libro {
         this.edicion = edicion;
     }
     
-    public long getCodigoLibro() {
+    public String getCodigoLibro() {
         return codigoLibro;
     }
 
-    public void setCodigoLibro(long codigoLibro) {
+    public void setCodigoLibro(String codigoLibro) {
         this.codigoLibro = codigoLibro;
     }
 
@@ -67,5 +66,9 @@ public class Libro {
         this.edicion = edicion;
     }
     
+    @Override
+    public String toString() {
+        return codigoLibro + " " + titulo;
+    }
     
 }
