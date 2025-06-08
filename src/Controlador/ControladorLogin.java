@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Conexion;
 import Vista.Login;
+import Vista.MenuPrincipal;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -18,7 +19,6 @@ public class ControladorLogin {
     public void iniciarLogin() {
 
         ventanaLogin.setVisible(true);
-        //Eventos del boton acceder del JFrame Login.
 
         //Boton acceder.
         ventanaLogin.btnAcceder.addMouseListener(new MouseAdapter() {
@@ -29,6 +29,9 @@ public class ControladorLogin {
                 Conexion.contraseña = new String(ventanaLogin.txtContraseña.getPassword());
                 Conexion.getConexion();
                 if (Conexion.getAcceso()) {
+                    ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
+                    m.iniciarMenuPrincipal();
+                    ventanaLogin.dispose();
                     System.out.println("Conexion concedida.");
                 } else {
                     System.out.println("Acceso denegado");

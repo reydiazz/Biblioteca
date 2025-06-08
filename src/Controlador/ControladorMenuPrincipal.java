@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Conexion;
 import Vista.MenuPrincipal;
 import java.awt.event.*;
 
@@ -12,9 +13,9 @@ public class ControladorMenuPrincipal {
     }
 
     public void iniciarMenuPrincipal() {
-        
+
         ventanaMenuPrincipal.setVisible(true);
-        
+
         ventanaMenuPrincipal.btnRegistrarAlumno.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -35,25 +36,32 @@ public class ControladorMenuPrincipal {
 
             }
         });
-        
+
         ventanaMenuPrincipal.btnDevolucionLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
             }
         });
-        
+
         ventanaMenuPrincipal.btnBuscarLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
             }
         });
-        
+
         ventanaMenuPrincipal.btnSalir.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
-                
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+
+        ventanaMenuPrincipal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Conexion.cerrarConexion();
             }
         });
     }
