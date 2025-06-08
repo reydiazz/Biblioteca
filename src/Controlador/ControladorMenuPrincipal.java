@@ -1,7 +1,9 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Vista.Login;
 import Vista.MenuPrincipal;
+import Vista.RegistrarAlumno;
 import java.awt.event.*;
 
 public class ControladorMenuPrincipal {
@@ -54,7 +56,10 @@ public class ControladorMenuPrincipal {
         ventanaMenuPrincipal.btnSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                Conexion.cerrarConexion();
+                ventanaMenuPrincipal.dispose();
+                ControladorLogin cl = new ControladorLogin(new Login());
+                cl.iniciarLogin();
             }
         });
 

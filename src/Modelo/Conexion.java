@@ -9,13 +9,13 @@ public class Conexion {
     private static Connection conn;
 
     private static final String url = "jdbc:postgresql://localhost:5432/Biblioteca";
-    public static  String usuario = "null";
-    public static  String contraseña = "null";
-    
+    public static String usuario = "null";
+    public static String contraseña = "null";
+
     private static boolean acceso = false;
 
     private Conexion() {
-        
+
     }
 
     public static boolean getAcceso() {
@@ -40,6 +40,7 @@ public class Conexion {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
+                conn = null;
                 System.out.println("Conexión cerrada");
             }
         } catch (SQLException e) {
