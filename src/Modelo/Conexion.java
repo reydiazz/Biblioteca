@@ -6,31 +6,44 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    private static Conexion instancia;
-    private Connection conexion;
+    private static Connection conn;
 
-    private final String url = "jdbc:postgresql://localhost:5432/mi_basedatos";
-    private final String usuario = "mi_usuario";
-    private final String contraseña = "mi_contraseña";
+    private static final String url = "jdbc:postgresql://localhost:5432/Biblioteca";
+    public static  String usuario = "null";
+    public static  String contraseña = "null";
+    
+    private static boolean acceso = false;
 
     private Conexion() {
+        
+    }
+
+    public static boolean getAcceso() {
+        return acceso;
+    }
+
+    public static Connection getConexion() {
+        if (conn == null) {
+            try {
+                conn = DriverManager.getConnection(url, usuario, contraseña);
+                System.out.println("Conexión establecida");
+                acceso = true;
+            } catch (SQLException e) {
+                System.err.println("Error al conectar: " + e.getMessage());
+                acceso = false;
+            }
+        }
+        return conn;
+    }
+
+    public static void cerrarConexion() {
         try {
-            conexion = DriverManager.getConnection(url, usuario, contraseña);
-            System.out.println("Conexión establecida correctamente.");
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+                System.out.println("Conexión cerrada");
+            }
         } catch (SQLException e) {
-            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
+            System.err.println("Error al cerrar la conexión: " + e.getMessage());
         }
     }
-
-    public static Conexion getInstancia() {
-        if (instancia == null) {
-            instancia = new Conexion();
-        }
-        return instancia;
-    }
-
-    public Connection getConexion() {
-        return conexion;
-    }
-
 }
