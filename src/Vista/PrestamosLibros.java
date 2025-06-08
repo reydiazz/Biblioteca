@@ -1,4 +1,3 @@
-
 package Vista;
 
 public class PrestamosLibros extends javax.swing.JFrame {
@@ -6,7 +5,6 @@ public class PrestamosLibros extends javax.swing.JFrame {
     public PrestamosLibros() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -219,47 +217,40 @@ public class PrestamosLibros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCodigoLibroPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoLibroPrestamoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCodigoLibroPrestamoActionPerformed
 
     private void txtCodigoAlumnoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoPrestamoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCodigoAlumnoPrestamoActionPerformed
 
     private void txtFechaDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDevolucionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtFechaDevolucionActionPerformed
 
     private void txtDiasRestantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasRestantesActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtDiasRestantesActionPerformed
 
     private void txtFechaPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaPrestamoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtFechaPrestamoActionPerformed
 
     private void btnPrestamoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestamoLibroActionPerformed
-        // TODO add your handling code here:
-        dispose();
+
     }//GEN-LAST:event_btnPrestamoLibroActionPerformed
 
     private void txtCodigoAlumnoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoBuscarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCodigoAlumnoBuscarActionPerformed
 
     private void btnBuscarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPrestamoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnBuscarPrestamoActionPerformed
 
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new MenuPrincipal().setVisible(true);
-    }//GEN-LAST:event_btnRegresar1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    }//GEN-LAST:event_btnRegresar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

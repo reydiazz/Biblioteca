@@ -1,6 +1,4 @@
-
 package Vista;
-
 
 public class Login extends javax.swing.JFrame {
 
@@ -87,7 +85,7 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAcceder;
     private javax.swing.Box.Filler filler1;
