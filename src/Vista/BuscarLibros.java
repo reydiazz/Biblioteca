@@ -4,6 +4,8 @@ public class BuscarLibros extends javax.swing.JFrame {
 
     public BuscarLibros() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

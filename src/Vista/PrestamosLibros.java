@@ -4,6 +4,8 @@ public class PrestamosLibros extends javax.swing.JFrame {
 
     public PrestamosLibros() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

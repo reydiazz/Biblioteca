@@ -4,6 +4,8 @@ public class DevolucionLibros extends javax.swing.JFrame {
 
     public DevolucionLibros() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

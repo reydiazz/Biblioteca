@@ -4,6 +4,8 @@ public class RegistroLibros extends javax.swing.JFrame {
 
     public RegistroLibros() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

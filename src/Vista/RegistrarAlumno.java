@@ -4,6 +4,8 @@ public class RegistrarAlumno extends javax.swing.JFrame {
 
     public RegistrarAlumno() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
