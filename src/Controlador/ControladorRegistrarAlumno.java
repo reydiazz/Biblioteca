@@ -1,5 +1,6 @@
 package Controlador;
 
+import Vista.MenuPrincipal;
 import Vista.RegistrarAlumno;
 import java.awt.event.*;
 
@@ -25,7 +26,9 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btnRegresar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                
+                ventanaRegistrarAlumno.dispose();
+                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
+                m.iniciarMenuPrincipal();
             }
         });
     }

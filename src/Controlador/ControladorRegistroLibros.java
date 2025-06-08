@@ -1,6 +1,7 @@
 
 package Controlador;
 
+import Vista.MenuPrincipal;
 import Vista.RegistroLibros;
 import java.awt.event.*;
 
@@ -33,7 +34,9 @@ public class ControladorRegistroLibros {
         ventanaRegistroLibro.btnRegresar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                
+                ventanaRegistroLibro.dispose();
+                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
+                m.iniciarMenuPrincipal();
             }
         });
     }

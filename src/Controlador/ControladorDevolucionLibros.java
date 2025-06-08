@@ -2,6 +2,7 @@
 package Controlador;
 
 import Vista.DevolucionLibros;
+import Vista.MenuPrincipal;
 import java.awt.event.*;
 
 public class ControladorDevolucionLibros {
@@ -26,7 +27,9 @@ public class ControladorDevolucionLibros {
         ventanaDevolucionLibros.btnRegresar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                
+                ventanaDevolucionLibros.dispose();
+                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
+                m.iniciarMenuPrincipal();
             }
         });
         

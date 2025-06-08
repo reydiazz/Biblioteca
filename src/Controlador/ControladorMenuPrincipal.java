@@ -1,9 +1,13 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Vista.BuscarLibros;
+import Vista.DevolucionLibros;
 import Vista.Login;
 import Vista.MenuPrincipal;
+import Vista.PrestamosLibros;
 import Vista.RegistrarAlumno;
+import Vista.RegistroLibros;
 import java.awt.event.*;
 
 public class ControladorMenuPrincipal {
@@ -21,35 +25,45 @@ public class ControladorMenuPrincipal {
         ventanaMenuPrincipal.btnRegistrarAlumno.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaMenuPrincipal.dispose();
+                ControladorRegistrarAlumno ra = new ControladorRegistrarAlumno(new RegistrarAlumno());
+                ra.iniciarMenuRegistrarAlumno();
             }
         });
 
         ventanaMenuPrincipal.btnPrestamoLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaMenuPrincipal.dispose();
+                ControladorPrestamosLibros pl = new ControladorPrestamosLibros(new PrestamosLibros());
+                pl.iniciarMenuPrestamosLibros();
             }
         });
 
         ventanaMenuPrincipal.btnRegistrarLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaMenuPrincipal.dispose();
+                ControladorRegistroLibros rl = new ControladorRegistroLibros(new RegistroLibros());
+                rl.iniciarMenuRegistroLibros();
             }
         });
 
         ventanaMenuPrincipal.btnDevolucionLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaMenuPrincipal.dispose();
+                ControladorDevolucionLibros dl = new ControladorDevolucionLibros(new DevolucionLibros());
+                dl.iniciarMenuDevolucionLibros();
             }
         });
 
         ventanaMenuPrincipal.btnBuscarLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaMenuPrincipal.dispose();
+                ControladorBuscarLibros bl = new ControladorBuscarLibros(new BuscarLibros());
+                bl.iniciarMenuBuscarLibros();
             }
         });
 

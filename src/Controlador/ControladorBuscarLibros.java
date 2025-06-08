@@ -1,6 +1,7 @@
 package Controlador;
 
 import Vista.BuscarLibros;
+import Vista.MenuPrincipal;
 import java.awt.event.*;
 
 public class ControladorBuscarLibros {
@@ -24,7 +25,9 @@ public class ControladorBuscarLibros {
         ventanaBuscarLibros.btnRegresar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                ventanaBuscarLibros.dispose();
+                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
+                m.iniciarMenuPrincipal();
             }
         });
     }
