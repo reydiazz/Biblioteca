@@ -171,7 +171,7 @@ public class DevolucionLibros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscarDevolucion;
-    private volatile javax.swing.JButton btnDevolverLibro;
+    public volatile javax.swing.JButton btnDevolverLibro;
     public javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
