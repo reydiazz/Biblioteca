@@ -15,7 +15,7 @@ public class ControladorRegistroLibros {
     
     public ControladorRegistroLibros(RegistroLibros ventanaRegistroLibro){
         this.ventanaRegistroLibro = ventanaRegistroLibro;
-        rldao = new RegistroLibrosDAO(Conexion.getConexion(), ventanaRegistroLibro);
+        rldao = new RegistroLibrosDAO(Conexion.getConexion());
     }
     
     public void iniciarMenuRegistroLibros(){

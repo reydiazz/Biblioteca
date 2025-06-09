@@ -2,13 +2,12 @@ package Modelo.DAO;
 
 import Modelo.Libro;
 import java.sql.*;
-import Vista.RegistroLibros;
 
 public class RegistroLibrosDAO {
     
     private Connection db = null;
 
-    public RegistroLibrosDAO(Connection db, RegistroLibros vista){
+    public RegistroLibrosDAO(Connection db){
         this.db = db;
     }
     

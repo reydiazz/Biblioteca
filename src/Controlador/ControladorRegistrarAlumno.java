@@ -14,7 +14,7 @@ public class ControladorRegistrarAlumno {
     
     public ControladorRegistrarAlumno(RegistrarAlumno ventanaRegistrarAlumno){
         this.ventanaRegistrarAlumno = ventanaRegistrarAlumno;
-        r = new RegistrarAlumnoDAO(Conexion.getConexion(), ventanaRegistrarAlumno);
+        r = new RegistrarAlumnoDAO(Conexion.getConexion());
     }
     
     public void iniciarMenuRegistrarAlumno(){

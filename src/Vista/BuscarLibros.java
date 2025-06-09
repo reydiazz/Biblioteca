@@ -69,7 +69,15 @@ public class BuscarLibros extends javax.swing.JFrame {
             new String [] {
                 "Codigo", "Titulo", "Edicion", "Genero", "Autor", "Nº de Copias"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblLibros);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 490, 280));

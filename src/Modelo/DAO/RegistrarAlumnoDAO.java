@@ -8,7 +8,7 @@ public class RegistrarAlumnoDAO {
 
     private Connection db = null;
 
-    public RegistrarAlumnoDAO(Connection db, RegistrarAlumno vista) {
+    public RegistrarAlumnoDAO(Connection db) {
         this.db = db;
     }
 
