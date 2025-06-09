@@ -1,11 +1,25 @@
 package Vista;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Font;
+import javax.swing.ButtonModel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+
 public class DevolucionLibros extends javax.swing.JFrame {
 
     public DevolucionLibros() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        personalizarBoton(btnRegresar);
+        personalizarBoton(btnBuscarDevolucion);
+        personalizarBoton(btnDevolverLibro);
+        personalizarTextField(txtCodigoAlumnoBuscar);
+        personalizarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -21,11 +35,15 @@ public class DevolucionLibros extends javax.swing.JFrame {
         txtCodigoAlumnoBuscar = new javax.swing.JTextField();
         btnBuscarDevolucion = new javax.swing.JButton();
         btnDevolverLibro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("CODIGO DEL ALUMNO");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 149, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegresar.setText("Regresar");
@@ -34,15 +52,26 @@ public class DevolucionLibros extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(762, 22, 120, 33));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Devolucion de Libros");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 22, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Libros Prestados");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 216, -1, -1));
 
         tblLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,11 +83,14 @@ public class DevolucionLibros extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblLibros);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 270, 528, 282));
+
         txtCodigoAlumnoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoAlumnoBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(txtCodigoAlumnoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 153, 230, -1));
 
         btnBuscarDevolucion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnBuscarDevolucion.setText("Buscar");
@@ -67,6 +99,7 @@ public class DevolucionLibros extends javax.swing.JFrame {
                 btnBuscarDevolucionActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscarDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 180, 50));
 
         btnDevolverLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDevolverLibro.setText("Devolver");
@@ -75,59 +108,10 @@ public class DevolucionLibros extends javax.swing.JFrame {
                 btnDevolverLibroActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDevolverLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(643, 389, 120, 33));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94)
-                                .addComponent(btnDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9))
-                        .addContainerGap(145, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtCodigoAlumnoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(btnBuscarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(256, 256, 256))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtCodigoAlumnoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jLabel9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(37, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDevolverLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/todos.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,11 +132,111 @@ public class DevolucionLibros extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDevolverLibroActionPerformed
 
+    private void personalizarBoton(javax.swing.JButton boton) {
+        boton.setFocusPainted(false);
+        boton.setBorderPainted(false);
+        boton.setContentAreaFilled(false);
+        boton.setOpaque(true);
+        boton.setBackground(new Color(204, 51, 0));
+        boton.setForeground(Color.WHITE);
+        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(255, 51, 0));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(204, 51, 0));
+            }
+        });
+
+        boton.getModel().addChangeListener(e -> {
+            ButtonModel model = boton.getModel();
+            if (model.isPressed()) {
+                boton.setBackground(new Color(204, 51, 0));
+            } else if (model.isRollover()) {
+                boton.setBackground(new Color(255, 51, 0));
+            } else {
+                boton.setBackground(new Color(204, 51, 0));
+            }
+        });
+    }
+
+    private void personalizarTextField(javax.swing.JTextField campo) {
+        campo.setBackground(Color.WHITE);
+        campo.setForeground(new Color(30, 30, 30));
+        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
+                javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+
+        // Evento para resaltar al enfocar
+        campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 2),
+                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
+                ));
+            }
+
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
+                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
+                ));
+            }
+        });
+    }
+
+    private void personalizarTabla() {
+        tblLibros.setBackground(new Color(245, 173, 156));
+        tblLibros.setSelectionBackground(new Color(232, 148, 129));
+
+        tblLibros.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        tblLibros.setRowHeight(25);
+        tblLibros.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
+        tblLibros.getTableHeader().setBackground(new Color(135, 25, 0));
+        tblLibros.getTableHeader().setForeground(Color.WHITE);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tblLibros.getColumnCount(); i++) {
+            tblLibros.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        tblLibros.setAutoCreateRowSorter(true);
+
+        tblLibros.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+                    if (row % 2 == 0) {
+                        c.setBackground(new Color(122, 22, 0));
+                    } else {
+                        c.setBackground(Color.WHITE);
+                    }
+                } else {
+                    c.setBackground(table.getSelectionBackground());
+                    c.setForeground(table.getSelectionForeground());
+                }
+                return c;
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscarDevolucion;
     public volatile javax.swing.JButton btnDevolverLibro;
     public javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
