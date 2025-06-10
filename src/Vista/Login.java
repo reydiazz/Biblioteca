@@ -3,19 +3,23 @@ package Vista;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Login extends javax.swing.JFrame {
 
     public Login() {
+        setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         personalizarBoton(btnAcceder);
         personalizarTextField(txtUsuario);
         personalizarTextField(txtContraseña);
-        setTitle("Biblioteca Escolar");
+        setTitle("Bienvenido");
     }
 
     @SuppressWarnings("unchecked")
@@ -23,52 +27,66 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        pn_principal = new javax.swing.JPanel();
+        pn_titulo = new javax.swing.JPanel();
+        lbl_titulo = new javax.swing.JLabel();
+        pn_contenido = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
+        lblContraseña = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JPasswordField();
         btnAcceder = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_libros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pn_principal.setBackground(new java.awt.Color(255, 255, 255));
+        pn_principal.setForeground(new java.awt.Color(255, 255, 255));
+        pn_principal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("USUARIO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+        pn_titulo.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Iniciar Sesion");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        lbl_titulo.setFont(new java.awt.Font("Montserrat", 1, 30)); // NOI18N
+        lbl_titulo.setForeground(new java.awt.Color(204, 0, 0));
+        lbl_titulo.setText("Iniciar Sesion");
+        lbl_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pn_titulo.add(lbl_titulo);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("CONTRASEÑA");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
+        pn_principal.add(pn_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 300, 50));
 
+        pn_contenido.setBackground(new java.awt.Color(255, 255, 255));
+        pn_contenido.setForeground(new java.awt.Color(255, 255, 255));
+        pn_contenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtUsuario.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 230, -1));
+        pn_contenido.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 210, 30));
 
+        lblContraseña.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lblContraseña.setForeground(new java.awt.Color(0, 0, 0));
+        lblContraseña.setText("Contraseña");
+        pn_contenido.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 30));
+
+        lblUsuario.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        lblUsuario.setText("Usuario");
+        pn_contenido.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 30));
+
+        txtContraseña.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         txtContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseñaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 240, -1));
+        pn_contenido.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 210, 30));
 
         btnAcceder.setBackground(new java.awt.Color(204, 0, 0));
-        btnAcceder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAcceder.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         btnAcceder.setForeground(new java.awt.Color(255, 255, 255));
         btnAcceder.setText("ACCEDER");
         btnAcceder.setBorder(null);
@@ -82,21 +100,14 @@ public class Login extends javax.swing.JFrame {
                 btnAccederActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 150, 50));
+        pn_contenido.add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 150, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/img.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -130, 490, 680));
+        lbl_libros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_LIBROS.png"))); // NOI18N
+        pn_contenido.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 310, 300));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 432, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 516, Short.MAX_VALUE)
-        );
+        pn_principal.add(pn_contenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 300, 390));
+
+        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,7 +135,6 @@ public class Login extends javax.swing.JFrame {
         boton.setOpaque(true);
         boton.setBackground(new Color(204, 51, 0));
         boton.setForeground(Color.WHITE);
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,37 +164,21 @@ public class Login extends javax.swing.JFrame {
     private void personalizarTextField(javax.swing.JTextField campo) {
         campo.setBackground(Color.WHITE);
         campo.setForeground(new Color(30, 30, 30));
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
-                javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8) // padding interno
-        ));
+        campo.setBorder(BorderFactory.createMatteBorder(0, 0,2, 0, new Color(204, 51, 0)));
+
 
         // Evento para resaltar al enfocar
-        campo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 2),
-                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
-                ));
-            }
-
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
-                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
-                ));
-            }
-        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAcceder;
     private javax.swing.Box.Filler filler1;
-    public javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    public javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel lblContraseña;
+    public javax.swing.JLabel lblUsuario;
+    public javax.swing.JLabel lbl_libros;
+    public javax.swing.JLabel lbl_titulo;
+    public javax.swing.JPanel pn_contenido;
+    public javax.swing.JPanel pn_principal;
+    public javax.swing.JPanel pn_titulo;
     public javax.swing.JPasswordField txtContraseña;
     public javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
