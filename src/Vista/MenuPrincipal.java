@@ -16,7 +16,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         personalizarBoton(btnRegistrarAlumno);
         personalizarBoton(btnPrestamoLibro);
         personalizarBoton(btnDevolucionLibro);
-        personalizarBoton(btnBuscarLibro);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,7 +26,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnRegistrarAlumno = new javax.swing.JButton();
         btnPrestamoLibro = new javax.swing.JButton();
         btnRegistrarLibro = new javax.swing.JButton();
-        btnBuscarLibro = new javax.swing.JButton();
         btnDevolucionLibro = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -71,17 +69,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegistrarLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 230, 50));
-
-        btnBuscarLibro.setBackground(new java.awt.Color(135, 25, 0));
-        btnBuscarLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnBuscarLibro.setText("Buscar Libros");
-        btnBuscarLibro.setBorder(null);
-        btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarLibroActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBuscarLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 230, 50));
 
         btnDevolucionLibro.setBackground(new java.awt.Color(135, 25, 0));
         btnDevolucionLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -139,10 +126,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegistrarLibroActionPerformed
 
-    private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
-
-    }//GEN-LAST:event_btnBuscarLibroActionPerformed
-
     private void btnDevolucionLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionLibroActionPerformed
 
     }//GEN-LAST:event_btnDevolucionLibroActionPerformed
@@ -186,7 +169,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscarLibro;
     public javax.swing.JButton btnDevolucionLibro;
     public javax.swing.JButton btnPrestamoLibro;
     public javax.swing.JButton btnRegistrarAlumno;

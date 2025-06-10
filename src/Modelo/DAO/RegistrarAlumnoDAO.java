@@ -29,7 +29,7 @@ public class RegistrarAlumnoDAO {
         return listaDatos;
     }
 
-    public void registrarAlumno(Alumno nuevoAlumno) {
+    public boolean registrarAlumno(Alumno nuevoAlumno) {
         if (nuevoAlumno != null) {
             String sql = "INSERT INTO alumno(id_alumno,nombre,apellido_p,nivel,grado,seccion) VALUES(?,?,?,?,?,?);";
             try {
@@ -42,13 +42,16 @@ public class RegistrarAlumnoDAO {
                 cs.setString(6, String.valueOf(nuevoAlumno.getSeccion()));
                 cs.execute();
                 System.out.println("Registro creado correctamente.");
+                return true;
             } catch (Exception e) {
                 System.out.println("Error al crear el registro.");
+                return false;
             }
         }
+        return false;
     }
 
-    public void modificarAlumno(Alumno modificadoAlumno, String codigoAlumno) {
+    public boolean modificarAlumno(Alumno modificadoAlumno, String codigoAlumno) {
         if (modificadoAlumno != null) {
             String sql = "UPDATE Alumno SET id_alumno = ?, nombre = ? , apellido_p = ?, nivel = ?, grado = ?, seccion = ? WHERE id_alumno = ?;";
 
@@ -63,25 +66,29 @@ public class RegistrarAlumnoDAO {
                 cs.setString(7, codigoAlumno);
                 cs.execute();
                 System.out.println("Dato modificado correctamente.");
+                return true;
             } catch (Exception e) {
                 System.out.println("Error al modificar.");
+                return false;
             }
         }
+        return false;
     }
 
-    public void eliminarAlumno(String codigoAlumno) {
+    public boolean eliminarAlumno(String codigoAlumno) {
         String sql = "DELETE FROM alumno WHERE id_alumno = ?;";
         try {
 
             CallableStatement c1 = db.prepareCall(sql);
             c1.setString(1, codigoAlumno);
             c1.execute();
-            
+
             System.out.println("Dato eliminado");
+            return true;
         } catch (NumberFormatException | SQLException e) {
             System.out.println("Error al eliminar");
+            return false;
         }
-
     }
 
 }

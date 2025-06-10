@@ -1,7 +1,6 @@
 package Controlador;
 
 import Modelo.Conexion;
-import Vista.BuscarLibros;
 import Vista.DevolucionLibros;
 import Vista.Login;
 import Vista.MenuPrincipal;
@@ -55,15 +54,6 @@ public class ControladorMenuPrincipal {
                 ventanaMenuPrincipal.dispose();
                 ControladorDevolucionLibros dl = new ControladorDevolucionLibros(new DevolucionLibros());
                 dl.iniciarMenuDevolucionLibros();
-            }
-        });
-
-        ventanaMenuPrincipal.btnBuscarLibro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                ventanaMenuPrincipal.dispose();
-                ControladorBuscarLibros bl = new ControladorBuscarLibros(new BuscarLibros());
-                bl.iniciarMenuBuscarLibros();
             }
         });
 

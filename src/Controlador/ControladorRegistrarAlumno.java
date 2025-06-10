@@ -9,7 +9,12 @@ import Vista.RegistrarAlumno;
 import java.awt.event.*;
 import java.util.LinkedList;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ControladorRegistrarAlumno {
 
@@ -29,6 +34,32 @@ public class ControladorRegistrarAlumno {
 
         actualizarRegistros(r.recojerAlumnos());
 
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistrarAlumno.tblAlumnos.getModel());
+        ventanaRegistrarAlumno.tblAlumnos.setRowSorter(sorter);
+
+        ventanaRegistrarAlumno.txtBuscador.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            private void filtrar() {
+                String texto = ventanaRegistrarAlumno.txtBuscador.getText();
+                if (texto.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto,1));
+                }
+            }
+        });
+
         ventanaRegistrarAlumno.tblAlumnos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -39,18 +70,18 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btnRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (comprobarCasillas(txf)) {
-                    if (verificarCodigoDuplicado(r.recojerAlumnos(), ventanaRegistrarAlumno.txtCodigo.getText())) {
-                        r.registrarAlumno(verificarFormulario(a, txf));
-                        actualizarRegistros(r.recojerAlumnos());
-                    } else {
-                        Aviso v = new Aviso(ventanaRegistrarAlumno, true, "Codigo ya existente");
-                        v.setVisible(true);
+
+                if ((verificarCodigoDuplicado(r.recojerAlumnos(), ventanaRegistrarAlumno.txtCodigo.getText()))) {
+                    if (comprobarCasillas(txf)) {
+                        if (r.registrarAlumno(verificarFormulario(a, txf))) {
+                            actualizarRegistros(r.recojerAlumnos());
+                            Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato registrado correctamente");
+                            a.setVisible(true);
+                            refrescarFormulario(txf);
+                        }
                     }
-                } else {
-                    Aviso v = new Aviso(ventanaRegistrarAlumno, true, "Complete los casilleros");
-                    v.setVisible(true);
                 }
+
             }
         });
 
@@ -58,16 +89,12 @@ public class ControladorRegistrarAlumno {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    if (comprobarCasillas(txf)) {
-                        r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txtCodigo.getText(), ventanaRegistrarAlumno.txtNombre.getText(), ventanaRegistrarAlumno.txtApellido.getText(), ventanaRegistrarAlumno.txtNivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txtGrado.getText()), ventanaRegistrarAlumno.txtSeccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0));
+                    if (r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txtCodigo.getText(), ventanaRegistrarAlumno.txtNombre.getText(), ventanaRegistrarAlumno.txtApellido.getText(), ventanaRegistrarAlumno.txtNivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txtGrado.getText()), ventanaRegistrarAlumno.txtSeccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0))) {
                         actualizarRegistros(r.recojerAlumnos());
-                    } else {
-                        Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Complete los casilleros");
+                        Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato modificado correctamente");
                         a.setVisible(true);
+                        refrescarFormulario(txf);
                     }
-                } else {
-                    Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Seleccione un registro");
-                    a.setVisible(true);
                 }
             }
         });
@@ -76,11 +103,12 @@ public class ControladorRegistrarAlumno {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    r.eliminarAlumno((String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0));
-                    actualizarRegistros(r.recojerAlumnos());
-                } else {
-                    Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Seleccione un registro");
-                    a.setVisible(true);
+                    if (r.eliminarAlumno((String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0))) {
+                        actualizarRegistros(r.recojerAlumnos());
+                        Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato eliminado correctamente");
+                        a.setVisible(true);
+                        refrescarFormulario(txf);
+                    }
                 }
             }
         });
@@ -100,6 +128,8 @@ public class ControladorRegistrarAlumno {
         if (filaElgda >= 0) {
             return true;
         } else {
+            Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Seleccione un registro");
+            a.setVisible(true);
             return false;
         }
     }
@@ -123,6 +153,8 @@ public class ControladorRegistrarAlumno {
         int i = 0;
         while (acceso) {
             if (txf[i].getText().trim().isEmpty()) {
+                Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Complete los casilleros");
+                a.setVisible(true);
                 acceso = false;
             }
             if (txf.length - 1 <= i && acceso != false) {
@@ -154,6 +186,8 @@ public class ControladorRegistrarAlumno {
     public boolean verificarCodigoDuplicado(LinkedList<Alumno> lista, String codigo) {
         for (int i = 0; i < lista.size(); i++) {
             if (codigo.equalsIgnoreCase(lista.get(i).getCodigoAlumno())) {
+                Aviso v = new Aviso(ventanaRegistrarAlumno, true, "Codigo ya existente");
+                v.setVisible(true);
                 return false;
             }
         }
