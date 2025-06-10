@@ -38,19 +38,28 @@ public class Aviso extends javax.swing.JDialog {
         lbl_titulo.setForeground(new java.awt.Color(0, 0, 0));
         lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_titulo.setText("  XXXXXX");
-        pn_principal.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 60));
+        pn_principal.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 60));
 
         btn_entendido.setBackground(new java.awt.Color(255, 51, 0));
         btn_entendido.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         btn_entendido.setForeground(new java.awt.Color(255, 255, 255));
         btn_entendido.setText("ENTENDIDO");
         btn_entendido.setBorder(null);
-        pn_principal.add(btn_entendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 170, 40));
+        btn_entendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_entendidoActionPerformed(evt);
+            }
+        });
+        pn_principal.add(btn_entendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 170, 40));
 
-        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 120));
+        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_entendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entendidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_entendidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_entendido;

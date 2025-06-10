@@ -55,8 +55,6 @@ public class ControladorBuscarLibros {
 
             modelo.addRow(datos);
         }
-        
-        
 
     }
 }
