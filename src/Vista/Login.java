@@ -165,9 +165,6 @@ public class Login extends javax.swing.JFrame {
         campo.setBackground(Color.WHITE);
         campo.setForeground(new Color(30, 30, 30));
         campo.setBorder(BorderFactory.createMatteBorder(0, 0,2, 0, new Color(204, 51, 0)));
-
-
-        // Evento para resaltar al enfocar
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAcceder;

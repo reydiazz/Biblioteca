@@ -30,13 +30,13 @@ public class ControladorLogin {
                 Conexion.contraseña = new String(ventanaLogin.txtContraseña.getPassword());
                 Conexion.getConexion();
                 if (Conexion.getAcceso()) {
-                    a = new Aviso(ventanaLogin, true, "Acceso concedido.");
+                    a = new Aviso(ventanaLogin, true, "Acceso concedido");
                     a.setVisible(true);
                     ventanaLogin.dispose();
                     ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
                     m.iniciarMenuPrincipal();
                 } else {
-                    a = new Aviso(ventanaLogin, true, "Acceso denegado.");
+                    a = new Aviso(ventanaLogin, true, "Acceso denegado");
                     a.setVisible(true);
                 }
             }
