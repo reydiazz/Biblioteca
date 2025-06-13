@@ -1,199 +1,178 @@
 package Vista;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class PrestamosLibros extends javax.swing.JFrame {
 
     public PrestamosLibros() {
+        setTitle("Prestamo de libros");
+        setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        personalizarBoton(btnRegresar1);
-        personalizarBoton(btnBuscarPrestamo);
         personalizarBoton(btnPrestamoLibro);
-        personalizarTextField(txtFechaPrestamo);
         personalizarTextField(txtCodigoAlumnoBuscar);
         personalizarTextField(txtCodigoLibroPrestamo);
         personalizarTextField(txtCodigoAlumnoPrestamo);
-        personalizarTextField(txtDiasRestantes);
         personalizarTextField(txtFechaDevolucion);
-        personalizarLista();
+        personalizarTabla(tblPrestamos);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCodigoLibroPrestamo = new javax.swing.JTextField();
-        txtCodigoAlumnoPrestamo = new javax.swing.JTextField();
-        txtFechaDevolucion = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtDiasRestantes = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtFechaPrestamo = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txtCodigoAlumnoBuscar = new javax.swing.JTextField();
         btnPrestamoLibro = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtCodigoAlumnoBuscar = new javax.swing.JTextField();
-        btnBuscarPrestamo = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        btnRegresar1 = new javax.swing.JButton();
+        tblPrestamos = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtCodigoLibroPrestamo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtFechaDevolucion = new javax.swing.JTextField();
+        txtCodigoAlumnoPrestamo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoLibroPrestamo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoLibroPrestamoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCodigoLibroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 161, 221, -1));
-
-        txtCodigoAlumnoPrestamo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoAlumnoPrestamoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCodigoAlumnoPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 207, 221, -1));
-
-        txtFechaDevolucion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaDevolucionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtFechaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 295, 221, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("FECHA PRESTAMO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 247, -1, -1));
-
-        txtDiasRestantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiasRestantesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDiasRestantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 339, 221, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CODIGO DEL LIBRO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 161, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("FECHA DEVOLUCION");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 291, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Libros Prestados");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 237, -1, -1));
-
-        txtFechaPrestamo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaPrestamoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtFechaPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 251, 221, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("DIAS RESTANTES");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 335, -1, -1));
-
-        btnPrestamoLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPrestamoLibro.setText("Prestamo");
-        btnPrestamoLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrestamoLibroActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPrestamoLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 379, 154, 33));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Prestamos de Libros");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 22, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("CODIGO DEL ALUMNO");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 203, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCodigoAlumnoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoAlumnoBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCodigoAlumnoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 169, 190, -1));
+        jPanel1.add(txtCodigoAlumnoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 240, 40));
 
-        btnBuscarPrestamo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnBuscarPrestamo.setText("Buscar");
-        btnBuscarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+        btnPrestamoLibro.setBackground(new java.awt.Color(204, 0, 0));
+        btnPrestamoLibro.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btnPrestamoLibro.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrestamoLibro.setText("PRESTAMO");
+        btnPrestamoLibro.setBorder(null);
+        btnPrestamoLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPrestamoActionPerformed(evt);
+                btnPrestamoLibroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 161, 154, 33));
+        jPanel1.add(btnPrestamoLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 240, 50));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("CODIGO DEL ALUMNO");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 130, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Prestamo");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1280, 70));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1", "2", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 280, 286, -1));
+        tblPrestamos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo del libro", "Libro", "Codigo del alumno", "Nombre", "Vencimiento "
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        btnRegresar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegresar1.setText("Regresar");
-        btnRegresar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresar1ActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        getContentPane().add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 22, -1, -1));
+        jScrollPane1.setViewportView(tblPrestamos);
+        if (tblPrestamos.getColumnModel().getColumnCount() > 0) {
+            tblPrestamos.getColumnModel().getColumn(0).setResizable(false);
+            tblPrestamos.getColumnModel().getColumn(1).setResizable(false);
+            tblPrestamos.getColumnModel().getColumn(2).setResizable(false);
+            tblPrestamos.getColumnModel().getColumn(3).setResizable(false);
+            tblPrestamos.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/todos.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 490));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 880, 430));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 130, -1, 60));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Codigo del libro");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
+        txtCodigoLibroPrestamo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        txtCodigoLibroPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoLibroPrestamoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtCodigoLibroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 40));
+
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Codigo del alumno");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Fecha devolucion");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
+
+        txtFechaDevolucion.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        txtFechaDevolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaDevolucionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtFechaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 240, 40));
+
+        txtCodigoAlumnoPrestamo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        txtCodigoAlumnoPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoAlumnoPrestamoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtCodigoAlumnoPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 240, 250));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMGEN_PRESTAMO.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 530, 320));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCodigoLibroPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoLibroPrestamoActionPerformed
-
-    }//GEN-LAST:event_txtCodigoLibroPrestamoActionPerformed
-
-    private void txtCodigoAlumnoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoPrestamoActionPerformed
-
-    }//GEN-LAST:event_txtCodigoAlumnoPrestamoActionPerformed
-
-    private void txtFechaDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDevolucionActionPerformed
-
-    }//GEN-LAST:event_txtFechaDevolucionActionPerformed
-
-    private void txtDiasRestantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasRestantesActionPerformed
-
-    }//GEN-LAST:event_txtDiasRestantesActionPerformed
-
-    private void txtFechaPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaPrestamoActionPerformed
-
-    }//GEN-LAST:event_txtFechaPrestamoActionPerformed
 
     private void btnPrestamoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestamoLibroActionPerformed
 
@@ -203,13 +182,57 @@ public class PrestamosLibros extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtCodigoAlumnoBuscarActionPerformed
 
-    private void btnBuscarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPrestamoActionPerformed
+    private void txtCodigoLibroPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoLibroPrestamoActionPerformed
 
-    }//GEN-LAST:event_btnBuscarPrestamoActionPerformed
+    }//GEN-LAST:event_txtCodigoLibroPrestamoActionPerformed
 
-    private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
+    private void txtFechaDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaDevolucionActionPerformed
 
-    }//GEN-LAST:event_btnRegresar1ActionPerformed
+    }//GEN-LAST:event_txtFechaDevolucionActionPerformed
+
+    private void txtCodigoAlumnoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoPrestamoActionPerformed
+
+    }//GEN-LAST:event_txtCodigoAlumnoPrestamoActionPerformed
+
+    private void personalizarTabla(JTable tbl) {
+        tbl.setBackground(Color.white); // lavanda clara
+        tbl.setSelectionBackground(new Color(234, 229, 228)); // azul claro
+
+        tbl.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        tbl.setRowHeight(25);
+        tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
+        tbl.getTableHeader().setBackground(new Color(204, 0, 0)); // índigo oscuro
+        tbl.getTableHeader().setForeground(Color.WHITE);
+        tbl.getTableHeader().setReorderingAllowed(false);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tbl.getColumnCount(); i++) {
+            tbl.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        tbl.setAutoCreateRowSorter(true);
+
+        tbl.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+                    if (row % 2 == 0) {
+                        c.setBackground(new Color(122, 22, 0)); // gris muy claro
+                    } else {
+                        c.setBackground(Color.WHITE);
+                    }
+                } else {
+                    c.setBackground(table.getSelectionBackground());
+                    c.setForeground(table.getSelectionForeground());
+                }
+                return c;
+            }
+        });
+    }
 
     private void personalizarBoton(javax.swing.JButton boton) {
         boton.setFocusPainted(false);
@@ -218,7 +241,6 @@ public class PrestamosLibros extends javax.swing.JFrame {
         boton.setOpaque(true);
         boton.setBackground(new Color(204, 51, 0));
         boton.setForeground(Color.WHITE);
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -248,58 +270,25 @@ public class PrestamosLibros extends javax.swing.JFrame {
     private void personalizarTextField(javax.swing.JTextField campo) {
         campo.setBackground(Color.WHITE);
         campo.setForeground(new Color(30, 30, 30));
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
-                javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8) // padding interno
-        ));
-
-        // Evento para resaltar al enfocar
-        campo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 2),
-                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
-                ));
-            }
-
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campo.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-                        javax.swing.BorderFactory.createLineBorder(new Color(204, 51, 0), 1),
-                        javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 8)
-                ));
-            }
-        });
+        campo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(204, 51, 0)));
     }
 
-    private void personalizarLista() {
-        jList1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
-        jList1.setBackground(new java.awt.Color(245, 245, 245));
-        jList1.setSelectionBackground(new java.awt.Color(210, 83, 24));
-        jList1.setSelectionForeground(Color.WHITE);
-        jList1.setFixedCellHeight(30);
-        jList1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscarPrestamo;
     public javax.swing.JButton btnPrestamoLibro;
-    public javax.swing.JButton btnRegresar1;
+    public javax.swing.JLabel btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    public javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable tblPrestamos;
     public javax.swing.JTextField txtCodigoAlumnoBuscar;
     public javax.swing.JTextField txtCodigoAlumnoPrestamo;
     public javax.swing.JTextField txtCodigoLibroPrestamo;
-    public javax.swing.JTextField txtDiasRestantes;
     public javax.swing.JTextField txtFechaDevolucion;
-    public javax.swing.JTextField txtFechaPrestamo;
     // End of variables declaration//GEN-END:variables
 }

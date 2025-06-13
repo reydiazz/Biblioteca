@@ -17,13 +17,7 @@ public class ControladorDevolucionLibros {
         
         ventanaDevolucionLibros.setVisible(true);
         
-        ventanaDevolucionLibros.btnBuscarDevolucion.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                
-            }
-        });
-        
+       
         ventanaDevolucionLibros.btnRegresar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){

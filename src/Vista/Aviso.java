@@ -4,8 +4,6 @@ package Vista;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class Aviso extends javax.swing.JDialog {
 
@@ -38,7 +36,7 @@ public class Aviso extends javax.swing.JDialog {
         lbl_titulo.setForeground(new java.awt.Color(0, 0, 0));
         lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_titulo.setText("  XXXXXX");
-        pn_principal.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 60));
+        pn_principal.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 60));
 
         btn_entendido.setBackground(new java.awt.Color(255, 51, 0));
         btn_entendido.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
@@ -50,9 +48,9 @@ public class Aviso extends javax.swing.JDialog {
                 btn_entendidoActionPerformed(evt);
             }
         });
-        pn_principal.add(btn_entendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 170, 40));
+        pn_principal.add(btn_entendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 170, 40));
 
-        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 120));
+        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

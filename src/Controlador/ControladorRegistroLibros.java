@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.Alumno;
 import Modelo.Conexion;
 import Modelo.DAO.RegistroLibrosDAO;
 import Modelo.Libro;

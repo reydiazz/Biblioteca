@@ -1,37 +1,66 @@
 package Modelo;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class Prestamo {
-    
-    private Alumno alumno;
-    private ArrayList<Libro> libro;
+
+    private String nombreAlumno;
+    private String nombreLibro;
+
+
+    private String codigoLibro;
+    private String codigoAlumno;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
     private int diasRestantes;
 
-    public Prestamo(Alumno alumno, ArrayList<Libro> libro, Date fechaPrestamo, Date fechaDevolucion, int diasRestantes) {
-        this.alumno = alumno;
-        this.libro = libro;
+    public Prestamo(String codigoLibro, String codigoAlumno, Date fechaPrestamo, Date fechaDevolucion, int diasRestantes) {
+        this.codigoLibro = codigoLibro;
+        this.codigoAlumno = codigoAlumno;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.diasRestantes = diasRestantes;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public Prestamo(String codigoLibro, String nombreLibro, String codigoAlumno, String nombreAlumno, Date fecha) {
+        this.codigoLibro = codigoLibro;
+        this.nombreLibro = nombreLibro;
+        this.codigoAlumno = codigoAlumno;
+        this.nombreAlumno = nombreAlumno;
+        this.fechaDevolucion = fecha;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public String getNombreAlumno() {
+        return nombreAlumno;
     }
 
-    public ArrayList<Libro> getLibro() {
-        return libro;
+    public void setNombreAlumno(String nombreAlumno) {
+        this.nombreAlumno = nombreAlumno;
     }
 
-    public void setLibro(ArrayList<Libro> libro) {
-        this.libro = libro;
+    public String getNombreLibro() {
+        return nombreLibro;
+    }
+
+    public void setNombreLibro(String nombreLibro) {
+        this.nombreLibro = nombreLibro;
+    }
+
+    public String getCodigoLibro() {
+        return codigoLibro;
+    }
+
+    public void setCodigoLibro(String codigoLibro) {
+        this.codigoLibro = codigoLibro;
+    }
+
+    public String getCodigoAlumno() {
+        return codigoAlumno;
+    }
+
+    public void setCodigoAlumno(String codigoAlumno) {
+        this.codigoAlumno = codigoAlumno;
     }
 
     public Date getFechaPrestamo() {
@@ -57,6 +86,5 @@ public class Prestamo {
     public void setDiasRestantes(int diasRestantes) {
         this.diasRestantes = diasRestantes;
     }
-    
-    
+
 }
