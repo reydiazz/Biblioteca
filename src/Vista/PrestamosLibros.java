@@ -7,13 +7,18 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class PrestamosLibros extends javax.swing.JFrame {
+    
+    int xMouse;
+    int yMouse;
 
     public PrestamosLibros() {
+        setUndecorated(true);
         setTitle("Prestamo de libros");
         setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
@@ -47,6 +52,10 @@ public class PrestamosLibros extends javax.swing.JFrame {
         txtFechaDevolucion = new javax.swing.JTextField();
         txtCodigoAlumnoPrestamo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        pn_toolbar = new javax.swing.JPanel();
+        lbl_ventana = new javax.swing.JLabel();
+        btn_minimizar = new javax.swing.JLabel();
+        btn_cerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,7 +68,7 @@ public class PrestamosLibros extends javax.swing.JFrame {
                 txtCodigoAlumnoBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCodigoAlumnoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 240, 40));
+        jPanel1.add(txtCodigoAlumnoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 210, 240, 40));
 
         btnPrestamoLibro.setBackground(new java.awt.Color(204, 0, 0));
         btnPrestamoLibro.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
@@ -71,16 +80,16 @@ public class PrestamosLibros extends javax.swing.JFrame {
                 btnPrestamoLibroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPrestamoLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 240, 50));
+        jPanel1.add(btnPrestamoLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 240, 50));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Prestamo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1280, 70));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1280, 70));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
 
         tblPrestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,10 +126,10 @@ public class PrestamosLibros extends javax.swing.JFrame {
             tblPrestamos.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 880, 430));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 880, 430));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 130, -1, 60));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 190, -1, 60));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,10 +173,48 @@ public class PrestamosLibros extends javax.swing.JFrame {
         });
         jPanel2.add(txtCodigoAlumnoPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 240, 250));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, 250));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMGEN_PRESTAMO.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 530, 320));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 530, 320));
+
+        pn_toolbar.setBackground(new java.awt.Color(204, 51, 0));
+        pn_toolbar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pn_toolbarMouseDragged(evt);
+            }
+        });
+        pn_toolbar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pn_toolbarMousePressed(evt);
+            }
+        });
+        pn_toolbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_ventana.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        lbl_ventana.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ventana.setText("Prestamo de libros");
+        pn_toolbar.add(lbl_ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 40));
+
+        btn_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_MINIMIZAR.png"))); // NOI18N
+        btn_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_minimizarMouseClicked(evt);
+            }
+        });
+        pn_toolbar.add(btn_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 40, 40));
+
+        btn_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_CERRAR.png"))); // NOI18N
+        btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cerrarMouseClicked(evt);
+            }
+        });
+        pn_toolbar.add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1235, 0, 40, 40));
+
+        jPanel1.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -193,6 +240,34 @@ public class PrestamosLibros extends javax.swing.JFrame {
     private void txtCodigoAlumnoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAlumnoPrestamoActionPerformed
 
     }//GEN-LAST:event_txtCodigoAlumnoPrestamoActionPerformed
+
+    private void btn_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_minimizarMouseClicked
+        setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_btn_minimizarMouseClicked
+
+    private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
+
+    }//GEN-LAST:event_btn_cerrarMouseClicked
+
+    private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
+        // Obtenemos las coordenadas actuales del raton en la pantalla.
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        // Calculamos la nueva posición del JFrame restando la posición inicial del mouse.
+        int deltaX = x - xMouse;
+        int deltaY = y - yMouse;
+        // Movemos el JFrame a la nueva posición.
+        setLocation(getX() + deltaX, getY() + deltaY);
+        // Actualizamos las coordenadas del mouse para el siguiente movimiento.
+        xMouse = x;
+        yMouse = y;
+    }//GEN-LAST:event_pn_toolbarMouseDragged
+
+    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
+
+        xMouse = evt.getXOnScreen();
+        yMouse = evt.getYOnScreen();
+    }//GEN-LAST:event_pn_toolbarMousePressed
 
     private void personalizarTabla(JTable tbl) {
         tbl.setBackground(Color.white); // lavanda clara
@@ -276,6 +351,8 @@ public class PrestamosLibros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnPrestamoLibro;
     public javax.swing.JLabel btnRegresar;
+    public javax.swing.JLabel btn_cerrar;
+    private javax.swing.JLabel btn_minimizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -285,6 +362,8 @@ public class PrestamosLibros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_ventana;
+    public javax.swing.JPanel pn_toolbar;
     public javax.swing.JTable tblPrestamos;
     public javax.swing.JTextField txtCodigoAlumnoBuscar;
     public javax.swing.JTextField txtCodigoAlumnoPrestamo;

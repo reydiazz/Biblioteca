@@ -4,6 +4,7 @@ import Modelo.Conexion;
 import Modelo.DAO.RegistroLibrosDAO;
 import Modelo.Libro;
 import Vista.Aviso;
+import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.RegistroLibros;
 import java.awt.event.*;
@@ -117,6 +118,16 @@ public class ControladorRegistroLibros {
                 ventanaRegistroLibro.dispose();
                 ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
                 m.iniciarMenuPrincipal();
+            }
+        });
+
+        ventanaRegistroLibro.btn_cerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Conexion.cerrarConexion();
+                ventanaRegistroLibro.dispose();
+                ControladorLogin cl = new ControladorLogin(new Login());
+                cl.iniciarLogin();
             }
         });
     }

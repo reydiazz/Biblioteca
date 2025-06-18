@@ -4,6 +4,7 @@ import Modelo.Conexion;
 import Modelo.DAO.PrestamoLibrosDAO;
 import Modelo.Prestamo;
 import Vista.Aviso;
+import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.PrestamosLibros;
 import java.awt.event.*;
@@ -26,8 +27,6 @@ public class ControladorPrestamosLibros {
     }
 
     public void iniciarMenuPrestamosLibros() {
-        
-        
 
         JTextField[] txf = {ventanaPrestamosLibros.txtCodigoAlumnoPrestamo, ventanaPrestamosLibros.txtCodigoLibroPrestamo, ventanaPrestamosLibros.txtFechaDevolucion};
 
@@ -56,6 +55,16 @@ public class ControladorPrestamosLibros {
                 ventanaPrestamosLibros.dispose();
                 ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
                 m.iniciarMenuPrincipal();
+            }
+        });
+
+        ventanaPrestamosLibros.btn_cerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Conexion.cerrarConexion();
+                ventanaPrestamosLibros.dispose();
+                ControladorLogin cl = new ControladorLogin(new Login());
+                cl.iniciarLogin();
             }
         });
     }
@@ -107,6 +116,8 @@ public class ControladorPrestamosLibros {
             return a;
         }
     }
+
+
 
     public void refrescarFormulario(JTextField[] txf) {
         for (int i = 0; i < txf.length; i++) {

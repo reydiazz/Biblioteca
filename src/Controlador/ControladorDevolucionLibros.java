@@ -5,6 +5,7 @@ import Modelo.DAO.DevolucionLibrosDAO;
 import Modelo.Prestamo;
 import Vista.Aviso;
 import Vista.DevolucionLibros;
+import Vista.Login;
 import Vista.MenuPrincipal;
 import java.awt.event.*;
 import java.util.LinkedList;
@@ -71,10 +72,10 @@ public class ControladorDevolucionLibros {
                     return;
                 }
                 int fila = ventanaDevolucionLibros.tblPrestamos.getSelectedRow();
-                String codigoLibro   = String.valueOf(
-                ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 0));
-                String codigoAlumno  = String.valueOf(
-                ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 2));
+                String codigoLibro = String.valueOf(
+                        ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 0));
+                String codigoAlumno = String.valueOf(
+                        ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 2));
                 boolean actualizado = pa.actualizarDevolverLibro(codigoAlumno, codigoLibro);
                 boolean eliminado = actualizado && pa.eliminarRegistroDevolucionLibro(codigoAlumno, codigoLibro);
                 if (actualizado && eliminado) {
@@ -83,6 +84,16 @@ public class ControladorDevolucionLibros {
                 } else {
                     new Aviso(ventanaDevolucionLibros, true, "No se pudo completar la devolución").setVisible(true);
                 }
+            }
+        });
+
+        ventanaDevolucionLibros.btn_cerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Conexion.cerrarConexion();
+                ventanaDevolucionLibros.dispose();
+                ControladorLogin cl = new ControladorLogin(new Login());
+                cl.iniciarLogin();
             }
         });
     }

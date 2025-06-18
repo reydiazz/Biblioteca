@@ -4,6 +4,7 @@ import Modelo.Alumno;
 import Modelo.Conexion;
 import Modelo.DAO.RegistrarAlumnoDAO;
 import Vista.Aviso;
+import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.RegistrarAlumno;
 import java.awt.event.*;
@@ -55,7 +56,7 @@ public class ControladorRegistrarAlumno {
                 if (texto.trim().length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto,1));
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto, 1));
                 }
             }
         });
@@ -119,6 +120,16 @@ public class ControladorRegistrarAlumno {
                 ventanaRegistrarAlumno.dispose();
                 ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
                 m.iniciarMenuPrincipal();
+            }
+        });
+
+        ventanaRegistrarAlumno.btn_cerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Conexion.cerrarConexion();
+                ventanaRegistrarAlumno.dispose();
+                ControladorLogin cl = new ControladorLogin(new Login());
+                cl.iniciarLogin();
             }
         });
     }

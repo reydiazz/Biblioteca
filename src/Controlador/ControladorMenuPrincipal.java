@@ -57,7 +57,7 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.btnSalir.addMouseListener(new MouseAdapter() {
+        ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Conexion.cerrarConexion();

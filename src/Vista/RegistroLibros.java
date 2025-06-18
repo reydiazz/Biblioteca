@@ -7,13 +7,18 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class RegistroLibros extends javax.swing.JFrame {
+    
+   int xMouse;
+   int yMouse;
 
     public RegistroLibros() {
+        setUndecorated(true);
         setTitle("Tabla libros");
         setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
@@ -60,6 +65,10 @@ public class RegistroLibros extends javax.swing.JFrame {
         txtBuscador = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        pn_toolbar = new javax.swing.JPanel();
+        lbl_ventana = new javax.swing.JLabel();
+        btn_minimizar = new javax.swing.JLabel();
+        btn_cerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,7 +92,7 @@ public class RegistroLibros extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Libros");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1280, 70));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1280, 70));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,7 +175,7 @@ public class RegistroLibros extends javax.swing.JFrame {
         });
         jPanel2.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 240, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 240, 490));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 240, 490));
 
         btnAgregar.setBackground(new java.awt.Color(204, 0, 0));
         btnAgregar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
@@ -193,7 +202,7 @@ public class RegistroLibros extends javax.swing.JFrame {
         jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 240, 40));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         tblLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,7 +232,7 @@ public class RegistroLibros extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblLibros);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 840, 380));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 840, 380));
 
         txtBuscador.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         txtBuscador.addActionListener(new java.awt.event.ActionListener() {
@@ -231,14 +240,52 @@ public class RegistroLibros extends javax.swing.JFrame {
                 txtBuscadorActionPerformed(evt);
             }
         });
-        jPanel1.add(txtBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 230, 40));
+        jPanel1.add(txtBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, 230, 40));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 130, -1, 60));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 150, -1, 60));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_ESTANTERIA.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 520, 430));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 520, 430));
+
+        pn_toolbar.setBackground(new java.awt.Color(204, 51, 0));
+        pn_toolbar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pn_toolbarMouseDragged(evt);
+            }
+        });
+        pn_toolbar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pn_toolbarMousePressed(evt);
+            }
+        });
+        pn_toolbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_ventana.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        lbl_ventana.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ventana.setText("Prestamo de libros");
+        pn_toolbar.add(lbl_ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 40));
+
+        btn_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_MINIMIZAR.png"))); // NOI18N
+        btn_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_minimizarMouseClicked(evt);
+            }
+        });
+        pn_toolbar.add(btn_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 40, 40));
+
+        btn_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_CERRAR.png"))); // NOI18N
+        btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cerrarMouseClicked(evt);
+            }
+        });
+        pn_toolbar.add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1235, 0, 40, 40));
+
+        jPanel1.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -284,6 +331,34 @@ public class RegistroLibros extends javax.swing.JFrame {
     private void txtBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscadorActionPerformed
+
+    private void btn_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_minimizarMouseClicked
+        setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_btn_minimizarMouseClicked
+
+    private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
+
+    }//GEN-LAST:event_btn_cerrarMouseClicked
+
+    private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
+        // Obtenemos las coordenadas actuales del raton en la pantalla.
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        // Calculamos la nueva posición del JFrame restando la posición inicial del mouse.
+        int deltaX = x - xMouse;
+        int deltaY = y - yMouse;
+        // Movemos el JFrame a la nueva posición.
+        setLocation(getX() + deltaX, getY() + deltaY);
+        // Actualizamos las coordenadas del mouse para el siguiente movimiento.
+        xMouse = x;
+        yMouse = y;
+    }//GEN-LAST:event_pn_toolbarMouseDragged
+
+    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
+
+        xMouse = evt.getXOnScreen();
+        yMouse = evt.getYOnScreen();
+    }//GEN-LAST:event_pn_toolbarMousePressed
     private void personalizarBoton(javax.swing.JButton boton) {
         boton.setFocusPainted(false);
         boton.setBorderPainted(false);
@@ -368,6 +443,8 @@ public class RegistroLibros extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JLabel btnRegresar;
+    public javax.swing.JLabel btn_cerrar;
+    private javax.swing.JLabel btn_minimizar;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -380,6 +457,8 @@ public class RegistroLibros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_ventana;
+    public javax.swing.JPanel pn_toolbar;
     public javax.swing.JTable tblLibros;
     public javax.swing.JTextField txtAutor;
     public javax.swing.JTextField txtBuscador;
