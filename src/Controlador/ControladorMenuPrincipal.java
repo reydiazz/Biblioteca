@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Modelo.Personalizacion;
 import Vista.DevolucionLibros;
 import Vista.Login;
 import Vista.MenuPrincipal;
@@ -8,6 +9,7 @@ import Vista.PrestamosLibros;
 import Vista.RegistrarAlumno;
 import Vista.RegistroLibros;
 import java.awt.event.*;
+import javax.swing.JFrame;
 
 public class ControladorMenuPrincipal {
 
@@ -18,10 +20,12 @@ public class ControladorMenuPrincipal {
     }
 
     public void iniciarMenuPrincipal() {
+        
+        new Personalizacion(ventanaMenuPrincipal, ventanaMenuPrincipal.pn_toolbar);
 
         ventanaMenuPrincipal.setVisible(true);
 
-        ventanaMenuPrincipal.btnRegistrarAlumno.addMouseListener(new MouseAdapter() {
+        ventanaMenuPrincipal.lbl_tituloAlumnos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaMenuPrincipal.dispose();
@@ -30,7 +34,7 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.btnPrestamoLibro.addMouseListener(new MouseAdapter() {
+        ventanaMenuPrincipal.lbl_tituloPrestamo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaMenuPrincipal.dispose();
@@ -39,7 +43,7 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.btnRegistrarLibro.addMouseListener(new MouseAdapter() {
+        ventanaMenuPrincipal.lbl_tituloLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaMenuPrincipal.dispose();
@@ -48,7 +52,7 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.btnDevolucionLibro.addMouseListener(new MouseAdapter() {
+        ventanaMenuPrincipal.lbl_tituloDevolver.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaMenuPrincipal.dispose();
@@ -67,10 +71,10 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.addWindowListener(new WindowAdapter() {
+        ventanaMenuPrincipal.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                Conexion.cerrarConexion();
+            public void mouseClicked(MouseEvent e) {
+                ventanaMenuPrincipal.setState(JFrame.ICONIFIED);
             }
         });
     }

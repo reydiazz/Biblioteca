@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Conexion;
 import Modelo.DAO.PrestamoLibrosDAO;
+import Modelo.Personalizacion;
 import Modelo.Prestamo;
 import Vista.Aviso;
 import Vista.Login;
@@ -13,6 +14,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class ControladorPrestamosLibros {
@@ -27,13 +30,16 @@ public class ControladorPrestamosLibros {
     }
 
     public void iniciarMenuPrestamosLibros() {
+        JButton[] btn = {ventanaPrestamosLibros.btn_prestamo};
+        JTextField[] txfs = {ventanaPrestamosLibros.txf_codigoAlumno, ventanaPrestamosLibros.txf_codigoLibro, ventanaPrestamosLibros.txf_fechaDevolucion, ventanaPrestamosLibros.txf_buscar};
+        JTextField[] txf = {ventanaPrestamosLibros.txf_codigoAlumno, ventanaPrestamosLibros.txf_codigoLibro, ventanaPrestamosLibros.txf_fechaDevolucion};
 
-        JTextField[] txf = {ventanaPrestamosLibros.txtCodigoAlumnoPrestamo, ventanaPrestamosLibros.txtCodigoLibroPrestamo, ventanaPrestamosLibros.txtFechaDevolucion};
+        new Personalizacion(ventanaPrestamosLibros, ventanaPrestamosLibros.pn_toolbar, txfs, btn, ventanaPrestamosLibros.tbl_tablaPrestamo);
 
         ventanaPrestamosLibros.setVisible(true);
 
         actualizarRegistros(pa.recojerPrestamos());
-        ventanaPrestamosLibros.btnPrestamoLibro.addMouseListener(new MouseAdapter() {
+        ventanaPrestamosLibros.btn_prestamo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -49,7 +55,7 @@ public class ControladorPrestamosLibros {
             }
         });
 
-        ventanaPrestamosLibros.btnRegresar.addMouseListener(new MouseAdapter() {
+        ventanaPrestamosLibros.btn_regresar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaPrestamosLibros.dispose();
@@ -67,6 +73,14 @@ public class ControladorPrestamosLibros {
                 cl.iniciarLogin();
             }
         });
+
+        ventanaPrestamosLibros.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ventanaPrestamosLibros.setState(JFrame.ICONIFIED);
+            }
+        });
+        
     }
 
     public boolean comprobarCasillas(JTextField[] txf) {
@@ -88,7 +102,7 @@ public class ControladorPrestamosLibros {
     }
 
     public void actualizarRegistros(LinkedList<Prestamo> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) ventanaPrestamosLibros.tblPrestamos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) ventanaPrestamosLibros.tbl_tablaPrestamo.getModel();
         String datos[] = new String[5];
         modelo.setRowCount(0);
 
@@ -105,7 +119,7 @@ public class ControladorPrestamosLibros {
 
     public Prestamo verificarFormulario(Prestamo a, JTextField[] txf) {
         try {
-            a = new Prestamo(ventanaPrestamosLibros.txtCodigoLibroPrestamo.getText(), ventanaPrestamosLibros.txtCodigoAlumnoPrestamo.getText(), Date.valueOf(LocalDate.now()), Date.valueOf(ventanaPrestamosLibros.txtFechaDevolucion.getText()), (int) ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(ventanaPrestamosLibros.txtFechaDevolucion.getText())));
+            a = new Prestamo(ventanaPrestamosLibros.txf_codigoLibro.getText(), ventanaPrestamosLibros.txf_codigoAlumno.getText(), Date.valueOf(LocalDate.now()), Date.valueOf(ventanaPrestamosLibros.txf_fechaDevolucion.getText()), (int) ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(ventanaPrestamosLibros.txf_fechaDevolucion.getText())));
             refrescarFormulario(txf);
             return a;
         } catch (NumberFormatException e) {
@@ -116,8 +130,6 @@ public class ControladorPrestamosLibros {
             return a;
         }
     }
-
-
 
     public void refrescarFormulario(JTextField[] txf) {
         for (int i = 0; i < txf.length; i++) {

@@ -3,12 +3,15 @@ package Controlador;
 import Modelo.Conexion;
 import Modelo.DAO.RegistroLibrosDAO;
 import Modelo.Libro;
+import Modelo.Personalizacion;
 import Vista.Aviso;
 import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.RegistroLibros;
 import java.awt.event.*;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -29,16 +32,19 @@ public class ControladorRegistroLibros {
     }
 
     public void iniciarMenuRegistroLibros() {
-        JTextField[] txf = {ventanaRegistroLibro.txtCodigoLibro, ventanaRegistroLibro.txtTitulo, ventanaRegistroLibro.txtAutor, ventanaRegistroLibro.txtGenero, ventanaRegistroLibro.txtStock, ventanaRegistroLibro.txtEdicion};
-
+        JTextField[] txf = {ventanaRegistroLibro.txf_codigo, ventanaRegistroLibro.txf_tituloLibro, ventanaRegistroLibro.txf_autor, ventanaRegistroLibro.txf_genero, ventanaRegistroLibro.txf_copias, ventanaRegistroLibro.txf_edicion};
+        JTextField[] txfs = {ventanaRegistroLibro.txf_codigo, ventanaRegistroLibro.txf_tituloLibro, ventanaRegistroLibro.txf_autor, ventanaRegistroLibro.txf_genero, ventanaRegistroLibro.txf_copias, ventanaRegistroLibro.txf_edicion, ventanaRegistroLibro.txf_buscador};
+        JButton[]btn = {ventanaRegistroLibro.btn_agregar,ventanaRegistroLibro.btn_eliminar,ventanaRegistroLibro.btn_modificar};
+      
+        new Personalizacion(ventanaRegistroLibro, ventanaRegistroLibro.pn_toolbar, txfs, btn, ventanaRegistroLibro.tbl_tablaLibro);
         ventanaRegistroLibro.setVisible(true);
 
         actualizarRegistros(rldao.recojerLibros());
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistroLibro.tblLibros.getModel());
-        ventanaRegistroLibro.tblLibros.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistroLibro.tbl_tablaLibro.getModel());
+        ventanaRegistroLibro.tbl_tablaLibro.setRowSorter(sorter);
 
-        ventanaRegistroLibro.txtBuscador.getDocument().addDocumentListener(new DocumentListener() {
+        ventanaRegistroLibro.txf_buscador.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 filtrar();
             }
@@ -52,7 +58,7 @@ public class ControladorRegistroLibros {
             }
 
             private void filtrar() {
-                String texto = ventanaRegistroLibro.txtBuscador.getText();
+                String texto = ventanaRegistroLibro.txf_buscador.getText();
                 if (texto.trim().length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
@@ -61,17 +67,17 @@ public class ControladorRegistroLibros {
             }
         });
 
-        ventanaRegistroLibro.tblLibros.addMouseListener(new MouseAdapter() {
+        ventanaRegistroLibro.tbl_tablaLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selecionRegistro(txf);
             }
         });
 
-        ventanaRegistroLibro.btnAgregar.addMouseListener(new MouseAdapter() {
+        ventanaRegistroLibro.btn_agregar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ((verificarCodigoDuplicado(rldao.recojerLibros(), ventanaRegistroLibro.txtCodigoLibro.getText()))) {
+                if ((verificarCodigoDuplicado(rldao.recojerLibros(), ventanaRegistroLibro.txf_codigo.getText()))) {
                     if (comprobarCasillas(txf)) {
                         if (rldao.registroLibro(verificarFormulario(lib, txf))) {
                             actualizarRegistros(rldao.recojerLibros());
@@ -84,11 +90,11 @@ public class ControladorRegistroLibros {
             }
         });
 
-        ventanaRegistroLibro.btnModificar.addMouseListener(new MouseAdapter() {
+        ventanaRegistroLibro.btn_modificar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    if (rldao.modificarLibro(new Libro(ventanaRegistroLibro.txtCodigoLibro.getText(), ventanaRegistroLibro.txtTitulo.getText(), ventanaRegistroLibro.txtAutor.getText(), ventanaRegistroLibro.txtGenero.getText(), Integer.parseInt(ventanaRegistroLibro.txtStock.getText()), ventanaRegistroLibro.txtEdicion.getText()), ventanaRegistroLibro.txtCodigoLibro.getText())) {
+                    if (rldao.modificarLibro(new Libro(ventanaRegistroLibro.txf_codigo.getText(), ventanaRegistroLibro.txf_tituloLibro.getText(), ventanaRegistroLibro.txf_autor.getText(), ventanaRegistroLibro.txf_genero.getText(), Integer.parseInt(ventanaRegistroLibro.txf_copias.getText()), ventanaRegistroLibro.txf_edicion.getText()), ventanaRegistroLibro.txf_codigo.getText())) {
                         actualizarRegistros(rldao.recojerLibros());
                         Aviso a = new Aviso(ventanaRegistroLibro, true, "Dato modificado correctamente");
                         a.setVisible(true);
@@ -98,11 +104,11 @@ public class ControladorRegistroLibros {
             }
         });
 
-        ventanaRegistroLibro.btnEliminar.addMouseListener(new MouseAdapter() {
+        ventanaRegistroLibro.btn_eliminar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    if (rldao.eliminarLibro((String) ventanaRegistroLibro.tblLibros.getValueAt(ventanaRegistroLibro.tblLibros.getSelectedRow(), 0))) {
+                    if (rldao.eliminarLibro((String) ventanaRegistroLibro.tbl_tablaLibro.getValueAt(ventanaRegistroLibro.tbl_tablaLibro.getSelectedRow(), 0))) {
                         actualizarRegistros(rldao.recojerLibros());
                         Aviso a = new Aviso(ventanaRegistroLibro, true, "Dato eliminado correctamente");
                         a.setVisible(true);
@@ -112,7 +118,7 @@ public class ControladorRegistroLibros {
             }
         });
 
-        ventanaRegistroLibro.btnRegresar.addMouseListener(new MouseAdapter() {
+        ventanaRegistroLibro.btn_regresar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaRegistroLibro.dispose();
@@ -130,10 +136,17 @@ public class ControladorRegistroLibros {
                 cl.iniciarLogin();
             }
         });
+
+        ventanaRegistroLibro.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ventanaRegistroLibro.setState(JFrame.ICONIFIED);
+            }
+        });
     }
 
     public boolean comprobarSeleccion() {
-        int filaElgda = ventanaRegistroLibro.tblLibros.getSelectedRow();
+        int filaElgda = ventanaRegistroLibro.tbl_tablaLibro.getSelectedRow();
         if (filaElgda >= 0) {
             return true;
         } else {
@@ -145,7 +158,7 @@ public class ControladorRegistroLibros {
 
     public Libro verificarFormulario(Libro a, JTextField[] txf) {
         try {
-            a = new Libro(ventanaRegistroLibro.txtCodigoLibro.getText(), ventanaRegistroLibro.txtTitulo.getText(), ventanaRegistroLibro.txtAutor.getText(), ventanaRegistroLibro.txtGenero.getText(), Integer.parseInt(ventanaRegistroLibro.txtStock.getText()), ventanaRegistroLibro.txtEdicion.getText());
+            a = new Libro(ventanaRegistroLibro.txf_codigo.getText(), ventanaRegistroLibro.txf_tituloLibro.getText(), ventanaRegistroLibro.txf_autor.getText(), ventanaRegistroLibro.txf_genero.getText(), Integer.parseInt(ventanaRegistroLibro.txf_copias.getText()), ventanaRegistroLibro.txf_edicion.getText());
             refrescarFormulario(txf);
             return a;
         } catch (NumberFormatException e) {
@@ -176,7 +189,7 @@ public class ControladorRegistroLibros {
     }
 
     public void actualizarRegistros(LinkedList<Libro> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) ventanaRegistroLibro.tblLibros.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) ventanaRegistroLibro.tbl_tablaLibro.getModel();
         String datos[] = new String[6];
         modelo.setRowCount(0);
 
@@ -204,10 +217,10 @@ public class ControladorRegistroLibros {
     }
 
     public void selecionRegistro(JTextField[] txf) {
-        int filaElgda = ventanaRegistroLibro.tblLibros.getSelectedRow();
+        int filaElgda = ventanaRegistroLibro.tbl_tablaLibro.getSelectedRow();
         if (filaElgda >= 0) {
             for (int i = 0; i < txf.length; i++) {
-                txf[i].setText((String) ventanaRegistroLibro.tblLibros.getValueAt(filaElgda, i));
+                txf[i].setText((String) ventanaRegistroLibro.tbl_tablaLibro.getValueAt(filaElgda, i));
             }
         }
     }

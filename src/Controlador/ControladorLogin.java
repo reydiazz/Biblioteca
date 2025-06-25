@@ -1,14 +1,15 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Modelo.Personalizacion;
 import Vista.Aviso;
 import Vista.Login;
 import Vista.MenuPrincipal;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class ControladorLogin {
 
@@ -20,7 +21,12 @@ public class ControladorLogin {
     }
 
     public void iniciarLogin() {
-
+        
+        JTextField [] campos = {ventanaLogin.txf_usuario,ventanaLogin.txf_contraseña};
+        JButton [] botones = {ventanaLogin.btn_acceder};
+        
+        new Personalizacion(ventanaLogin, ventanaLogin.pn_toolbar,campos,botones);
+        
         ventanaLogin.setVisible(true);
 
         ventanaLogin.btn_acceder.addMouseListener(new MouseAdapter() {

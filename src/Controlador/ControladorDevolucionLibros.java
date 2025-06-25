@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Conexion;
 import Modelo.DAO.DevolucionLibrosDAO;
+import Modelo.Personalizacion;
 import Modelo.Prestamo;
 import Vista.Aviso;
 import Vista.DevolucionLibros;
@@ -9,6 +10,8 @@ import Vista.Login;
 import Vista.MenuPrincipal;
 import java.awt.event.*;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,11 +29,16 @@ public class ControladorDevolucionLibros {
     }
 
     public void iniciarMenuDevolucionLibros() {
+        
+        JButton [] btns = {ventanaDevolucionLibros.btn_devolverLibro};
+        JTextField []txf ={ventanaDevolucionLibros.txf_buscar};
+        
+        new Personalizacion(ventanaDevolucionLibros, ventanaDevolucionLibros.pn_toolbar, txf, btns, ventanaDevolucionLibros.tbl_tablaDevolucion);
 
         ventanaDevolucionLibros.setVisible(true);
         actualizarRegistros(pa.recojerPrestamos());
 
-        ventanaDevolucionLibros.btnRegresar.addMouseListener(new MouseAdapter() {
+        ventanaDevolucionLibros.btn_regresar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaDevolucionLibros.dispose();
@@ -39,10 +47,10 @@ public class ControladorDevolucionLibros {
             }
         });
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaDevolucionLibros.tblPrestamos.getModel());
-        ventanaDevolucionLibros.tblPrestamos.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaDevolucionLibros.tbl_tablaDevolucion.getModel());
+        ventanaDevolucionLibros.tbl_tablaDevolucion.setRowSorter(sorter);
 
-        ventanaDevolucionLibros.txtCodigoAlumnoBuscar.getDocument().addDocumentListener(new DocumentListener() {
+        ventanaDevolucionLibros.txf_buscar.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 filtrar();
             }
@@ -56,7 +64,7 @@ public class ControladorDevolucionLibros {
             }
 
             private void filtrar() {
-                String texto = ventanaDevolucionLibros.txtCodigoAlumnoBuscar.getText();
+                String texto = ventanaDevolucionLibros.txf_buscar.getText();
                 if (texto.trim().length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
@@ -65,17 +73,17 @@ public class ControladorDevolucionLibros {
             }
         });
 
-        ventanaDevolucionLibros.btnDevolverLibro.addMouseListener(new MouseAdapter() {
+        ventanaDevolucionLibros.btn_devolverLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (!comprobarSeleccion()) {
                     return;
                 }
-                int fila = ventanaDevolucionLibros.tblPrestamos.getSelectedRow();
+                int fila = ventanaDevolucionLibros.tbl_tablaDevolucion.getSelectedRow();
                 String codigoLibro = String.valueOf(
-                        ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 0));
+                        ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 0));
                 String codigoAlumno = String.valueOf(
-                        ventanaDevolucionLibros.tblPrestamos.getValueAt(fila, 2));
+                        ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 2));
                 boolean actualizado = pa.actualizarDevolverLibro(codigoAlumno, codigoLibro);
                 boolean eliminado = actualizado && pa.eliminarRegistroDevolucionLibro(codigoAlumno, codigoLibro);
                 if (actualizado && eliminado) {
@@ -99,7 +107,7 @@ public class ControladorDevolucionLibros {
     }
 
     public void actualizarRegistros(LinkedList<Prestamo> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) ventanaDevolucionLibros.tblPrestamos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) ventanaDevolucionLibros.tbl_tablaDevolucion.getModel();
         String datos[] = new String[5];
         modelo.setRowCount(0);
 
@@ -115,7 +123,7 @@ public class ControladorDevolucionLibros {
     }
 
     public boolean comprobarSeleccion() {
-        int filaElgda = ventanaDevolucionLibros.tblPrestamos.getSelectedRow();
+        int filaElgda = ventanaDevolucionLibros.tbl_tablaDevolucion.getSelectedRow();
         if (filaElgda >= 0) {
             return true;
         } else {

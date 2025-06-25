@@ -1,25 +1,16 @@
 package Vista;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
-public class Login extends javax.swing.JFrame {
-
-    int xMouse;
-    int yMouse;
+public class Login extends JFrame {
 
     public Login() {
         setUndecorated(true);
-        setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
-        personalizarBoton(btn_acceder);
-        personalizarTextField(txf_usuario);
-        personalizarTextField(txf_contraseña);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,16 +71,6 @@ public class Login extends javax.swing.JFrame {
         pn_principal.add(pn_contenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 300, 380));
 
         pn_toolbar.setBackground(new java.awt.Color(204, 51, 0));
-        pn_toolbar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                pn_toolbarMouseDragged(evt);
-            }
-        });
-        pn_toolbar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pn_toolbarMousePressed(evt);
-            }
-        });
         pn_toolbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_ventana.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
@@ -119,63 +100,6 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
-        xMouse = evt.getXOnScreen();
-        yMouse = evt.getYOnScreen();
-    }//GEN-LAST:event_pn_toolbarMousePressed
-
-    private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
-        // Obtenemos las coordenadas actuales del raton en la pantalla.
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        // Calculamos la nueva posición del JFrame restando la posición inicial del mouse.
-        int deltaX = x - xMouse;
-        int deltaY = y - yMouse;
-        // Movemos el JFrame a la nueva posición.
-        setLocation(getX() + deltaX, getY() + deltaY);
-        // Actualizamos las coordenadas del mouse para el siguiente movimiento.
-        xMouse = x;
-        yMouse = y;
-    }//GEN-LAST:event_pn_toolbarMouseDragged
-
-    private void personalizarBoton(javax.swing.JButton boton) {
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setContentAreaFilled(false);
-        boton.setOpaque(true);
-        boton.setBackground(new Color(204, 51, 0));
-        boton.setForeground(Color.WHITE);
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        boton.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(255, 51, 0));
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(204, 51, 0));
-            }
-        });
-
-        boton.getModel().addChangeListener(e -> {
-            ButtonModel model = boton.getModel();
-            if (model.isPressed()) {
-                boton.setBackground(new Color(204, 51, 0));
-            } else if (model.isRollover()) {
-                boton.setBackground(new Color(255, 51, 0));
-            } else {
-                boton.setBackground(new Color(204, 51, 0));
-            }
-        });
-    }
-
-    private void personalizarTextField(javax.swing.JTextField campo) {
-        campo.setBackground(Color.WHITE);
-        campo.setForeground(new Color(30, 30, 30));
-        campo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(204, 51, 0)));
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_acceder;
     public javax.swing.JLabel btn_cerrar;

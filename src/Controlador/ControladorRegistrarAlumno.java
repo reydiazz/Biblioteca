@@ -3,12 +3,15 @@ package Controlador;
 import Modelo.Alumno;
 import Modelo.Conexion;
 import Modelo.DAO.RegistrarAlumnoDAO;
+import Modelo.Personalizacion;
 import Vista.Aviso;
 import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.RegistrarAlumno;
 import java.awt.event.*;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -29,16 +32,21 @@ public class ControladorRegistrarAlumno {
     }
 
     public void iniciarMenuRegistrarAlumno() {
-        JTextField[] txf = {ventanaRegistrarAlumno.txtCodigo, ventanaRegistrarAlumno.txtNombre, ventanaRegistrarAlumno.txtApellido, ventanaRegistrarAlumno.txtNivel, ventanaRegistrarAlumno.txtGrado, ventanaRegistrarAlumno.txtSeccion};
+        JButton[] btn = {ventanaRegistrarAlumno.btn_eliminar, ventanaRegistrarAlumno.btn_modificar, ventanaRegistrarAlumno.btn_registrar};
+        JTextField[] txf = {ventanaRegistrarAlumno.txf_codigo, ventanaRegistrarAlumno.txf_nombre, ventanaRegistrarAlumno.txf_apellido, ventanaRegistrarAlumno.txf_nivel, ventanaRegistrarAlumno.txf_grado, ventanaRegistrarAlumno.txf_seccion};
+
+        JTextField[] txfs = {ventanaRegistrarAlumno.txf_codigo, ventanaRegistrarAlumno.txf_nombre, ventanaRegistrarAlumno.txf_apellido, ventanaRegistrarAlumno.txf_nivel, ventanaRegistrarAlumno.txf_grado, ventanaRegistrarAlumno.txf_seccion, ventanaRegistrarAlumno.txf_buscador};
+
+        new Personalizacion(ventanaRegistrarAlumno, ventanaRegistrarAlumno.pn_toolbar, txfs, btn, ventanaRegistrarAlumno.tbl_tablaAlumnos);
 
         ventanaRegistrarAlumno.setVisible(true);
 
         actualizarRegistros(r.recojerAlumnos());
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistrarAlumno.tblAlumnos.getModel());
-        ventanaRegistrarAlumno.tblAlumnos.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistrarAlumno.tbl_tablaAlumnos.getModel());
+        ventanaRegistrarAlumno.tbl_tablaAlumnos.setRowSorter(sorter);
 
-        ventanaRegistrarAlumno.txtBuscador.getDocument().addDocumentListener(new DocumentListener() {
+        ventanaRegistrarAlumno.txf_buscador.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 filtrar();
             }
@@ -52,7 +60,7 @@ public class ControladorRegistrarAlumno {
             }
 
             private void filtrar() {
-                String texto = ventanaRegistrarAlumno.txtBuscador.getText();
+                String texto = ventanaRegistrarAlumno.txf_buscador.getText();
                 if (texto.trim().length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
@@ -61,18 +69,18 @@ public class ControladorRegistrarAlumno {
             }
         });
 
-        ventanaRegistrarAlumno.tblAlumnos.addMouseListener(new MouseAdapter() {
+        ventanaRegistrarAlumno.tbl_tablaAlumnos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selecionRegistro(txf);
             }
         });
 
-        ventanaRegistrarAlumno.btnRegistrar.addMouseListener(new MouseAdapter() {
+        ventanaRegistrarAlumno.btn_registrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                if ((verificarCodigoDuplicado(r.recojerAlumnos(), ventanaRegistrarAlumno.txtCodigo.getText()))) {
+                if ((verificarCodigoDuplicado(r.recojerAlumnos(), ventanaRegistrarAlumno.txf_codigo.getText()))) {
                     if (comprobarCasillas(txf)) {
                         if (r.registrarAlumno(verificarFormulario(a, txf))) {
                             actualizarRegistros(r.recojerAlumnos());
@@ -86,11 +94,11 @@ public class ControladorRegistrarAlumno {
             }
         });
 
-        ventanaRegistrarAlumno.btnModificar.addMouseListener(new MouseAdapter() {
+        ventanaRegistrarAlumno.btn_modificar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    if (r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txtCodigo.getText(), ventanaRegistrarAlumno.txtNombre.getText(), ventanaRegistrarAlumno.txtApellido.getText(), ventanaRegistrarAlumno.txtNivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txtGrado.getText()), ventanaRegistrarAlumno.txtSeccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0))) {
+                    if (r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txf_codigo.getText(), ventanaRegistrarAlumno.txf_nombre.getText(), ventanaRegistrarAlumno.txf_apellido.getText(), ventanaRegistrarAlumno.txf_nivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText()), ventanaRegistrarAlumno.txf_seccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
                         actualizarRegistros(r.recojerAlumnos());
                         Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato modificado correctamente");
                         a.setVisible(true);
@@ -100,11 +108,11 @@ public class ControladorRegistrarAlumno {
             }
         });
 
-        ventanaRegistrarAlumno.btnEliminar.addMouseListener(new MouseAdapter() {
+        ventanaRegistrarAlumno.btn_eliminar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (comprobarSeleccion()) {
-                    if (r.eliminarAlumno((String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(ventanaRegistrarAlumno.tblAlumnos.getSelectedRow(), 0))) {
+                    if (r.eliminarAlumno((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
                         actualizarRegistros(r.recojerAlumnos());
                         Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato eliminado correctamente");
                         a.setVisible(true);
@@ -114,7 +122,7 @@ public class ControladorRegistrarAlumno {
             }
         });
 
-        ventanaRegistrarAlumno.btnRegresar.addMouseListener(new MouseAdapter() {
+        ventanaRegistrarAlumno.btn_regresar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventanaRegistrarAlumno.dispose();
@@ -132,10 +140,17 @@ public class ControladorRegistrarAlumno {
                 cl.iniciarLogin();
             }
         });
+
+        ventanaRegistrarAlumno.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ventanaRegistrarAlumno.setState(JFrame.ICONIFIED);
+            }
+        });
     }
 
     public boolean comprobarSeleccion() {
-        int filaElgda = ventanaRegistrarAlumno.tblAlumnos.getSelectedRow();
+        int filaElgda = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
         if (filaElgda >= 0) {
             return true;
         } else {
@@ -147,7 +162,7 @@ public class ControladorRegistrarAlumno {
 
     public Alumno verificarFormulario(Alumno a, JTextField[] txf) {
         try {
-            a = new Alumno(ventanaRegistrarAlumno.txtCodigo.getText(), ventanaRegistrarAlumno.txtNombre.getText(), ventanaRegistrarAlumno.txtApellido.getText(), ventanaRegistrarAlumno.txtNivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txtGrado.getText()), ventanaRegistrarAlumno.txtSeccion.getText().charAt(0));
+            a = new Alumno(ventanaRegistrarAlumno.txf_codigo.getText(), ventanaRegistrarAlumno.txf_nombre.getText(), ventanaRegistrarAlumno.txf_apellido.getText(), ventanaRegistrarAlumno.txf_nivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText()), ventanaRegistrarAlumno.txf_seccion.getText().charAt(0));
             refrescarFormulario(txf);
             return a;
         } catch (NumberFormatException e) {
@@ -178,7 +193,7 @@ public class ControladorRegistrarAlumno {
     }
 
     public void actualizarRegistros(LinkedList<Alumno> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) ventanaRegistrarAlumno.tblAlumnos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) ventanaRegistrarAlumno.tbl_tablaAlumnos.getModel();
         String datos[] = new String[6];
         modelo.setRowCount(0);
 
@@ -206,10 +221,10 @@ public class ControladorRegistrarAlumno {
     }
 
     public void selecionRegistro(JTextField[] txf) {
-        int filaElgda = ventanaRegistrarAlumno.tblAlumnos.getSelectedRow();
+        int filaElgda = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
         if (filaElgda >= 0) {
             for (int i = 0; i < txf.length; i++) {
-                txf[i].setText((String) ventanaRegistrarAlumno.tblAlumnos.getValueAt(filaElgda, i));
+                txf[i].setText((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(filaElgda, i));
             }
         }
     }

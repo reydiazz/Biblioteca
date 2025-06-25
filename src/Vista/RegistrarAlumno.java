@@ -1,70 +1,45 @@
 package Vista;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class RegistrarAlumno extends javax.swing.JFrame {
-    
-   int xMouse;
-   int yMouse;
 
     public RegistrarAlumno() {
         setUndecorated(true);
-        setTitle("Tabla alumnos");
         setIconImage(new ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_LIBRO.png")).getImage());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        personalizarBoton(btnEliminar);
-        personalizarBoton(btnModificar);
-        personalizarBoton(btnRegistrar);
-        personalizarTextField(txtCodigo);
-        personalizarTextField(txtApellido);
-        personalizarTextField(txtGrado);
-        personalizarTextField(txtNivel);
-        personalizarTextField(txtNombre);
-        personalizarTextField(txtSeccion);
-        personalizarTextField(txtBuscador);
-        personalizarTabla(tblAlumnos);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtNivel = new javax.swing.JTextField();
-        txtGrado = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtSeccion = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblAlumnos = new javax.swing.JTable();
-        txtBuscador = new javax.swing.JTextField();
-        btnRegresar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        pn_principal = new javax.swing.JPanel();
+        lbl_titulo = new javax.swing.JLabel();
+        pn_contenedorFormulario = new javax.swing.JPanel();
+        lbl_codigo = new javax.swing.JLabel();
+        txf_codigo = new javax.swing.JTextField();
+        lbl_nombre = new javax.swing.JLabel();
+        lbl_apellido = new javax.swing.JLabel();
+        txf_apellido = new javax.swing.JTextField();
+        lbl_nivel = new javax.swing.JLabel();
+        txf_nivel = new javax.swing.JTextField();
+        txf_grado = new javax.swing.JTextField();
+        lbl_grado = new javax.swing.JLabel();
+        lbl_seccion = new javax.swing.JLabel();
+        txf_seccion = new javax.swing.JTextField();
+        txf_nombre = new javax.swing.JTextField();
+        js_tablaAlumnos = new javax.swing.JScrollPane();
+        tbl_tablaAlumnos = new javax.swing.JTable();
+        txf_buscador = new javax.swing.JTextField();
+        btn_regresar = new javax.swing.JLabel();
+        lbl_imagenAlumnos = new javax.swing.JLabel();
+        lbl_iconoBuscador = new javax.swing.JLabel();
+        btn_modificar = new javax.swing.JButton();
+        btn_registrar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
         pn_toolbar = new javax.swing.JPanel();
         lbl_ventana = new javax.swing.JLabel();
         btn_minimizar = new javax.swing.JLabel();
@@ -73,99 +48,69 @@ public class RegistrarAlumno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pn_principal.setBackground(new java.awt.Color(255, 255, 255));
+        pn_principal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Alumnos");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1280, 70));
+        lbl_titulo.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
+        lbl_titulo.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_titulo.setText("ALUMNOS");
+        pn_principal.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1280, 90));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pn_contenedorFormulario.setBackground(new java.awt.Color(255, 255, 255));
+        pn_contenedorFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Codigo del estudiante");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+        lbl_codigo.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_codigo.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_codigo.setText("Codigo del estudiante");
+        pn_contenedorFormulario.add(lbl_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
 
-        txtCodigo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 240, 30));
+        txf_codigo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 240, 30));
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Nombre");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
+        lbl_nombre.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_nombre.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_nombre.setText("Nombre");
+        pn_contenedorFormulario.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Apellido");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
+        lbl_apellido.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_apellido.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_apellido.setText("Apellido");
+        pn_contenedorFormulario.add(lbl_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
 
-        txtApellido.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 240, 40));
+        txf_apellido.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 240, 40));
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Nivel academico");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
+        lbl_nivel.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_nivel.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_nivel.setText("Nivel academico");
+        pn_contenedorFormulario.add(lbl_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
 
-        txtNivel.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtNivel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNivelActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 40));
+        txf_nivel.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 40));
 
-        txtGrado.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtGrado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGradoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 240, 40));
+        txf_grado.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 240, 40));
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Grado");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
+        lbl_grado.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_grado.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_grado.setText("Grado");
+        pn_contenedorFormulario.add(lbl_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Seccion");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, -1, -1));
+        lbl_seccion.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        lbl_seccion.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_seccion.setText("Seccion");
+        pn_contenedorFormulario.add(lbl_seccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, -1, -1));
 
-        txtSeccion.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtSeccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeccionActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtSeccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 240, 40));
+        txf_seccion.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_seccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 240, 40));
 
-        txtNombre.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, 40));
+        txf_nombre.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_contenedorFormulario.add(txf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 240, 490));
+        pn_principal.add(pn_contenedorFormulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 240, 490));
 
-        tblAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -191,282 +136,95 @@ public class RegistrarAlumno extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblAlumnos);
+        js_tablaAlumnos.setViewportView(tbl_tablaAlumnos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 840, 360));
+        pn_principal.add(js_tablaAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 840, 380));
 
-        txtBuscador.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        txtBuscador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscadorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 230, 40));
+        txf_buscador.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_principal.add(txf_buscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 230, 40));
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 70, 60));
+        btn_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
+        pn_principal.add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 70, 60));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_ESTUDIANTES.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 500, 360));
+        lbl_imagenAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_ESTUDIANTES.png"))); // NOI18N
+        lbl_imagenAlumnos.setText("jLabel2");
+        pn_principal.add(lbl_imagenAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 500, 360));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 170, -1, 60));
+        lbl_iconoBuscador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
+        pn_principal.add(lbl_iconoBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 200, -1, 60));
 
-        btnModificar.setBackground(new java.awt.Color(204, 0, 0));
-        btnModificar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("MODIFICAR");
-        btnModificar.setBorder(null);
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, 240, 40));
+        btn_modificar.setBackground(new java.awt.Color(204, 0, 0));
+        btn_modificar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setText("MODIFICAR");
+        btn_modificar.setBorder(null);
+        pn_principal.add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 670, 240, 40));
 
-        btnRegistrar.setBackground(new java.awt.Color(204, 0, 0));
-        btnRegistrar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText("REGISTRAR");
-        btnRegistrar.setBorder(null);
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 630, 240, 40));
+        btn_registrar.setBackground(new java.awt.Color(204, 0, 0));
+        btn_registrar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_registrar.setText("REGISTRAR");
+        btn_registrar.setBorder(null);
+        pn_principal.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 670, 240, 40));
 
-        btnEliminar.setBackground(new java.awt.Color(204, 0, 0));
-        btnEliminar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.setBorder(null);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 630, 240, 40));
+        btn_eliminar.setBackground(new java.awt.Color(204, 0, 0));
+        btn_eliminar.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btn_eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_eliminar.setText("ELIMINAR");
+        btn_eliminar.setBorder(null);
+        pn_principal.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 670, 240, 40));
 
         pn_toolbar.setBackground(new java.awt.Color(204, 51, 0));
-        pn_toolbar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                pn_toolbarMouseDragged(evt);
-            }
-        });
-        pn_toolbar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pn_toolbarMousePressed(evt);
-            }
-        });
         pn_toolbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_ventana.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         lbl_ventana.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_ventana.setText("Prestamo de libros");
-        pn_toolbar.add(lbl_ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 40));
+        lbl_ventana.setText("Registro de alumnos");
+        pn_toolbar.add(lbl_ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 170, 40));
 
         btn_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_MINIMIZAR.png"))); // NOI18N
-        btn_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_minimizarMouseClicked(evt);
-            }
-        });
         pn_toolbar.add(btn_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 40, 40));
 
         btn_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_CERRAR.png"))); // NOI18N
-        btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_cerrarMouseClicked(evt);
-            }
-        });
         pn_toolbar.add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1235, 0, 40, 40));
 
-        jPanel1.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
+        pn_principal.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 780));
+        getContentPane().add(pn_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-
-    }//GEN-LAST:event_txtApellidoActionPerformed
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-
-    }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void txtGradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradoActionPerformed
-
-    }//GEN-LAST:event_txtGradoActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeccionActionPerformed
-
-    }//GEN-LAST:event_txtSeccionActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelActionPerformed
-
-    }//GEN-LAST:event_txtNivelActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void txtBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscadorActionPerformed
-
-    private void btn_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_minimizarMouseClicked
-        setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_btn_minimizarMouseClicked
-
-    private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
-
-    }//GEN-LAST:event_btn_cerrarMouseClicked
-
-    private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
-        // Obtenemos las coordenadas actuales del raton en la pantalla.
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        // Calculamos la nueva posición del JFrame restando la posición inicial del mouse.
-        int deltaX = x - xMouse;
-        int deltaY = y - yMouse;
-        // Movemos el JFrame a la nueva posición.
-        setLocation(getX() + deltaX, getY() + deltaY);
-        // Actualizamos las coordenadas del mouse para el siguiente movimiento.
-        xMouse = x;
-        yMouse = y;
-    }//GEN-LAST:event_pn_toolbarMouseDragged
-
-    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
-
-        xMouse = evt.getXOnScreen();
-        yMouse = evt.getYOnScreen();
-    }//GEN-LAST:event_pn_toolbarMousePressed
-
-    private void personalizarBoton(javax.swing.JButton boton) {
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setContentAreaFilled(false);
-        boton.setOpaque(true);
-        boton.setBackground(new Color(204, 51, 0));
-        boton.setForeground(Color.WHITE);
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        boton.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(255, 51, 0));
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(204, 51, 0));
-            }
-        });
-
-        boton.getModel().addChangeListener(e -> {
-            ButtonModel model = boton.getModel();
-            if (model.isPressed()) {
-                boton.setBackground(new Color(204, 51, 0));
-            } else if (model.isRollover()) {
-                boton.setBackground(new Color(255, 51, 0));
-            } else {
-                boton.setBackground(new Color(204, 51, 0));
-            }
-        });
-    }
-
-    private void personalizarTabla(JTable tbl) {
-        tbl.setBackground(Color.white); // lavanda clara
-        tbl.setSelectionBackground(new Color(234, 229, 228)); // azul claro
-
-        tbl.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        tbl.setRowHeight(25);
-        tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
-        tbl.getTableHeader().setBackground(new Color(204, 0, 0)); // índigo oscuro
-        tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.getTableHeader().setReorderingAllowed(false);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < tbl.getColumnCount(); i++) {
-            tbl.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-
-        tbl.setAutoCreateRowSorter(true);
-
-        tbl.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value,
-                    boolean isSelected, boolean hasFocus, int row, int column) {
-
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                if (!isSelected) {
-                    if (row % 2 == 0) {
-                        c.setBackground(new Color(122, 22, 0)); // gris muy claro
-                    } else {
-                        c.setBackground(Color.WHITE);
-                    }
-                } else {
-                    c.setBackground(table.getSelectionBackground());
-                    c.setForeground(table.getSelectionForeground());
-                }
-                return c;
-            }
-        });
-    }
-
-    private void personalizarTextField(javax.swing.JTextField campo) {
-        campo.setBackground(Color.WHITE);
-        campo.setForeground(new Color(30, 30, 30));
-        campo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(204, 51, 0)));
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnModificar;
-    public javax.swing.JButton btnRegistrar;
-    public javax.swing.JLabel btnRegresar;
     public javax.swing.JLabel btn_cerrar;
-    private javax.swing.JLabel btn_minimizar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_ventana;
+    public javax.swing.JButton btn_eliminar;
+    public javax.swing.JLabel btn_minimizar;
+    public javax.swing.JButton btn_modificar;
+    public javax.swing.JButton btn_registrar;
+    public javax.swing.JLabel btn_regresar;
+    public javax.swing.JScrollPane js_tablaAlumnos;
+    public javax.swing.JLabel lbl_apellido;
+    public javax.swing.JLabel lbl_codigo;
+    public javax.swing.JLabel lbl_grado;
+    public javax.swing.JLabel lbl_iconoBuscador;
+    public javax.swing.JLabel lbl_imagenAlumnos;
+    public javax.swing.JLabel lbl_nivel;
+    public javax.swing.JLabel lbl_nombre;
+    public javax.swing.JLabel lbl_seccion;
+    public javax.swing.JLabel lbl_titulo;
+    public javax.swing.JLabel lbl_ventana;
+    public javax.swing.JPanel pn_contenedorFormulario;
+    public javax.swing.JPanel pn_principal;
     public javax.swing.JPanel pn_toolbar;
-    public javax.swing.JTable tblAlumnos;
-    public javax.swing.JTextField txtApellido;
-    public javax.swing.JTextField txtBuscador;
-    public javax.swing.JTextField txtCodigo;
-    public javax.swing.JTextField txtGrado;
-    public javax.swing.JTextField txtNivel;
-    public javax.swing.JTextField txtNombre;
-    public javax.swing.JTextField txtSeccion;
+    public javax.swing.JTable tbl_tablaAlumnos;
+    public javax.swing.JTextField txf_apellido;
+    public javax.swing.JTextField txf_buscador;
+    public javax.swing.JTextField txf_codigo;
+    public javax.swing.JTextField txf_grado;
+    public javax.swing.JTextField txf_nivel;
+    public javax.swing.JTextField txf_nombre;
+    public javax.swing.JTextField txf_seccion;
     // End of variables declaration//GEN-END:variables
 }
