@@ -11,6 +11,7 @@ import Vista.MenuPrincipal;
 import java.awt.event.*;
 import java.util.LinkedList;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.*;
@@ -29,10 +30,10 @@ public class ControladorDevolucionLibros {
     }
 
     public void iniciarMenuDevolucionLibros() {
-        
-        JButton [] btns = {ventanaDevolucionLibros.btn_devolverLibro};
-        JTextField []txf ={ventanaDevolucionLibros.txf_buscar};
-        
+
+        JButton[] btns = {ventanaDevolucionLibros.btn_devolverLibro};
+        JTextField[] txf = {ventanaDevolucionLibros.txf_buscar};
+
         new Personalizacion(ventanaDevolucionLibros, ventanaDevolucionLibros.pn_toolbar, txf, btns, ventanaDevolucionLibros.tbl_tablaDevolucion);
 
         ventanaDevolucionLibros.setVisible(true);
@@ -102,6 +103,13 @@ public class ControladorDevolucionLibros {
                 ventanaDevolucionLibros.dispose();
                 ControladorLogin cl = new ControladorLogin(new Login());
                 cl.iniciarLogin();
+            }
+        });
+
+        ventanaDevolucionLibros.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ventanaDevolucionLibros.setState(JFrame.ICONIFIED);
             }
         });
     }
