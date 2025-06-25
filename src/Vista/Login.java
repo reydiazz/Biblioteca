@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 public class Login extends javax.swing.JFrame {
 
@@ -18,23 +17,22 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        personalizarBoton(btnAcceder);
-        personalizarTextField(txtUsuario);
-        personalizarTextField(txtContraseña);
+        personalizarBoton(btn_acceder);
+        personalizarTextField(txf_usuario);
+        personalizarTextField(txf_contraseña);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         pn_principal = new javax.swing.JPanel();
         pn_contenido = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
-        lblContraseña = new javax.swing.JLabel();
-        lblUsuario = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JPasswordField();
-        btnAcceder = new javax.swing.JButton();
+        txf_usuario = new javax.swing.JTextField();
+        lbl_contraseña = new javax.swing.JLabel();
+        lbl_usuario = new javax.swing.JLabel();
+        txf_contraseña = new javax.swing.JPasswordField();
+        btn_acceder = new javax.swing.JButton();
         lbl_libros = new javax.swing.JLabel();
         pn_toolbar = new javax.swing.JPanel();
         lbl_ventana = new javax.swing.JLabel();
@@ -53,48 +51,28 @@ public class Login extends javax.swing.JFrame {
         pn_contenido.setForeground(new java.awt.Color(255, 255, 255));
         pn_contenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUsuario.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
-        pn_contenido.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 210, 30));
+        txf_usuario.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        pn_contenido.add(txf_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 210, 30));
 
-        lblContraseña.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        lblContraseña.setForeground(new java.awt.Color(0, 0, 0));
-        lblContraseña.setText("Contraseña");
-        pn_contenido.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 30));
+        lbl_contraseña.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lbl_contraseña.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_contraseña.setText("Contraseña");
+        pn_contenido.add(lbl_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 30));
 
-        lblUsuario.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
-        lblUsuario.setText("Usuario");
-        pn_contenido.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 30));
+        lbl_usuario.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        lbl_usuario.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_usuario.setText("Usuario");
+        pn_contenido.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 30));
 
-        txtContraseña.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        txtContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaActionPerformed(evt);
-            }
-        });
-        pn_contenido.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 210, 30));
+        txf_contraseña.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        pn_contenido.add(txf_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 210, 30));
 
-        btnAcceder.setBackground(new java.awt.Color(204, 0, 0));
-        btnAcceder.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        btnAcceder.setForeground(new java.awt.Color(255, 255, 255));
-        btnAcceder.setText("ACCEDER");
-        btnAcceder.setBorder(null);
-        btnAcceder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAccederMouseExited(evt);
-            }
-        });
-        btnAcceder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAccederActionPerformed(evt);
-            }
-        });
-        pn_contenido.add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 150, 40));
+        btn_acceder.setBackground(new java.awt.Color(204, 0, 0));
+        btn_acceder.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btn_acceder.setForeground(new java.awt.Color(255, 255, 255));
+        btn_acceder.setText("ACCEDER");
+        btn_acceder.setBorder(null);
+        pn_contenido.add(btn_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 150, 40));
 
         lbl_libros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_LIBROS.png"))); // NOI18N
         pn_contenido.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 300, 330));
@@ -121,20 +99,10 @@ public class Login extends javax.swing.JFrame {
 
         btn_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_MINIMIZAR.png"))); // NOI18N
-        btn_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_minimizarMouseClicked(evt);
-            }
-        });
         pn_toolbar.add(btn_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 40, 40));
 
         btn_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_CERRAR.png"))); // NOI18N
-        btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_cerrarMouseClicked(evt);
-            }
-        });
         pn_toolbar.add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 40, 40));
 
         pn_principal.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 40));
@@ -151,21 +119,10 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-
-    }//GEN-LAST:event_btnAccederActionPerformed
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
-
-    private void btnAccederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAccederMouseExited
+    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
+        xMouse = evt.getXOnScreen();
+        yMouse = evt.getYOnScreen();
+    }//GEN-LAST:event_pn_toolbarMousePressed
 
     private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
         // Obtenemos las coordenadas actuales del raton en la pantalla.
@@ -180,20 +137,6 @@ public class Login extends javax.swing.JFrame {
         xMouse = x;
         yMouse = y;
     }//GEN-LAST:event_pn_toolbarMouseDragged
-
-    private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
-
-        xMouse = evt.getXOnScreen();
-        yMouse = evt.getYOnScreen();
-    }//GEN-LAST:event_pn_toolbarMousePressed
-
-    private void btn_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_minimizarMouseClicked
-        setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_btn_minimizarMouseClicked
-
-    private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btn_cerrarMouseClicked
 
     private void personalizarBoton(javax.swing.JButton boton) {
         boton.setFocusPainted(false);
@@ -234,19 +177,18 @@ public class Login extends javax.swing.JFrame {
         campo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(204, 51, 0)));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAcceder;
-    private javax.swing.JLabel btn_cerrar;
-    private javax.swing.JLabel btn_minimizar;
-    private javax.swing.Box.Filler filler1;
-    public javax.swing.JLabel lblContraseña;
-    public javax.swing.JLabel lblUsuario;
+    public javax.swing.JButton btn_acceder;
+    public javax.swing.JLabel btn_cerrar;
+    public javax.swing.JLabel btn_minimizar;
+    public javax.swing.JLabel lbl_contraseña;
     public javax.swing.JLabel lbl_libros;
     public javax.swing.JLabel lbl_titulo;
-    private javax.swing.JLabel lbl_ventana;
+    public javax.swing.JLabel lbl_usuario;
+    public javax.swing.JLabel lbl_ventana;
     public javax.swing.JPanel pn_contenido;
     public javax.swing.JPanel pn_principal;
     public javax.swing.JPanel pn_toolbar;
-    public javax.swing.JPasswordField txtContraseña;
-    public javax.swing.JTextField txtUsuario;
+    public javax.swing.JPasswordField txf_contraseña;
+    public javax.swing.JTextField txf_usuario;
     // End of variables declaration//GEN-END:variables
 }

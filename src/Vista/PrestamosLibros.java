@@ -216,7 +216,7 @@ public class PrestamosLibros extends javax.swing.JFrame {
 
         jPanel1.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

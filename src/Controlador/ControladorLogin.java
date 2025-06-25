@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 public class ControladorLogin {
 
@@ -22,12 +23,11 @@ public class ControladorLogin {
 
         ventanaLogin.setVisible(true);
 
-        ventanaLogin.btnAcceder.addMouseListener(new MouseAdapter() {
-
+        ventanaLogin.btn_acceder.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Conexion.usuario = ventanaLogin.txtUsuario.getText();
-                Conexion.contraseña = new String(ventanaLogin.txtContraseña.getPassword());
+                Conexion.usuario = ventanaLogin.txf_usuario.getText();
+                Conexion.contraseña = new String(ventanaLogin.txf_contraseña.getPassword());
                 Conexion.getConexion();
                 if (Conexion.getAcceso()) {
                     a = new Aviso(ventanaLogin, true, "Acceso concedido");
@@ -42,10 +42,18 @@ public class ControladorLogin {
             }
         });
 
-        ventanaLogin.addWindowListener(new WindowAdapter() {
+        ventanaLogin.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 Conexion.cerrarConexion();
+                System.exit(0);
+            }
+        });
+
+        ventanaLogin.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ventanaLogin.setState(JFrame.ICONIFIED);
             }
         });
 
