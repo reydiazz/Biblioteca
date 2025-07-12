@@ -1,5 +1,7 @@
 package Controlador;
 
+import Command.CerrarCommand;
+import Command.MinimizarCommand;
 import Modelo.Conexion;
 import Modelo.Personalizacion;
 import Vista.DevolucionLibros;
@@ -20,7 +22,7 @@ public class ControladorMenuPrincipal {
     }
 
     public void iniciarMenuPrincipal() {
-        
+
         new Personalizacion(ventanaMenuPrincipal, ventanaMenuPrincipal.pn_toolbar);
 
         ventanaMenuPrincipal.setVisible(true);
@@ -61,7 +63,7 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
+        /*ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Conexion.cerrarConexion();
@@ -76,7 +78,21 @@ public class ControladorMenuPrincipal {
             public void mouseClicked(MouseEvent e) {
                 ventanaMenuPrincipal.setState(JFrame.ICONIFIED);
             }
+        }); */
+        
+        ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new CerrarCommand(ventanaMenuPrincipal).execute();
+            }
         });
-    }
 
+        ventanaMenuPrincipal.btn_minimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new MinimizarCommand(ventanaMenuPrincipal).execute();
+            }
+        });
+
+    }
 }

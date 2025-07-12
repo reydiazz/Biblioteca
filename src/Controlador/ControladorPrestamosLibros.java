@@ -1,5 +1,8 @@
 package Controlador;
 
+import Command.CerrarCommand;
+import Command.MinimizarCommand;
+import Factory.AvisoFactory;
 import Modelo.Conexion;
 import Modelo.DAO.PrestamoLibrosDAO;
 import Modelo.Personalizacion;
@@ -46,7 +49,7 @@ public class ControladorPrestamosLibros {
                 if (comprobarCasillas(txf)) {
                     if (pa.registrarPrestamos(verificarFormulario(p, txf))) {
                         actualizarRegistros(pa.recojerPrestamos());
-                        Aviso a = new Aviso(ventanaPrestamosLibros, true, "Dato registrado correctamente");
+                        Aviso a = AvisoFactory.crearAviso(ventanaPrestamosLibros, true, "OK");
                         a.setVisible(true);
                         refrescarFormulario(txf);
                     }
@@ -67,20 +70,17 @@ public class ControladorPrestamosLibros {
         ventanaPrestamosLibros.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Conexion.cerrarConexion();
-                ventanaPrestamosLibros.dispose();
-                ControladorLogin cl = new ControladorLogin(new Login());
-                cl.iniciarLogin();
+                new CerrarCommand(ventanaPrestamosLibros).execute();
             }
         });
 
         ventanaPrestamosLibros.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaPrestamosLibros.setState(JFrame.ICONIFIED);
+                new MinimizarCommand(ventanaPrestamosLibros).execute();
             }
         });
-        
+
     }
 
     public boolean comprobarCasillas(JTextField[] txf) {
@@ -88,7 +88,7 @@ public class ControladorPrestamosLibros {
         int i = 0;
         while (acceso) {
             if (txf[i].getText().trim().isEmpty()) {
-                Aviso a = new Aviso(ventanaPrestamosLibros, true, "Complete los casilleros");
+                Aviso a = AvisoFactory.crearAviso(ventanaPrestamosLibros, true, "VACIO");
                 a.setVisible(true);
                 acceso = false;
             }
@@ -124,7 +124,7 @@ public class ControladorPrestamosLibros {
             return a;
         } catch (NumberFormatException e) {
             if (a == null) {
-                Aviso v = new Aviso(ventanaPrestamosLibros, true, "Complete el formulario correctamente.");
+                Aviso v = AvisoFactory.crearAviso(ventanaPrestamosLibros, true, "XFORM");
                 v.setVisible(true);
             }
             return a;

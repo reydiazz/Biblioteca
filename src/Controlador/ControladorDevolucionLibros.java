@@ -1,5 +1,8 @@
 package Controlador;
 
+import Command.CerrarCommand;
+import Command.MinimizarCommand;
+import Factory.AvisoFactory;
 import Modelo.Conexion;
 import Modelo.DAO.DevolucionLibrosDAO;
 import Modelo.Personalizacion;
@@ -89,9 +92,9 @@ public class ControladorDevolucionLibros {
                 boolean eliminado = actualizado && pa.eliminarRegistroDevolucionLibro(codigoAlumno, codigoLibro);
                 if (actualizado && eliminado) {
                     actualizarRegistros(pa.recojerPrestamos());
-                    new Aviso(ventanaDevolucionLibros, true, "Libro devuelto correctamente").setVisible(true);
+                    AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "DEVUELTO").setVisible(true);
                 } else {
-                    new Aviso(ventanaDevolucionLibros, true, "No se pudo completar la devolución").setVisible(true);
+                    AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "NO_DEVUELTO").setVisible(true);
                 }
             }
         });
@@ -99,17 +102,14 @@ public class ControladorDevolucionLibros {
         ventanaDevolucionLibros.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Conexion.cerrarConexion();
-                ventanaDevolucionLibros.dispose();
-                ControladorLogin cl = new ControladorLogin(new Login());
-                cl.iniciarLogin();
+                new CerrarCommand(ventanaDevolucionLibros).execute();
             }
         });
 
         ventanaDevolucionLibros.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaDevolucionLibros.setState(JFrame.ICONIFIED);
+                new MinimizarCommand(ventanaDevolucionLibros).execute();
             }
         });
     }
@@ -135,7 +135,7 @@ public class ControladorDevolucionLibros {
         if (filaElgda >= 0) {
             return true;
         } else {
-            Aviso a = new Aviso(ventanaDevolucionLibros, true, "Seleccione un registro");
+            Aviso a = AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "SELECCIONE");
             a.setVisible(true);
             return false;
         }

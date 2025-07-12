@@ -1,5 +1,8 @@
 package Controlador;
 
+import Command.CerrarCommand;
+import Command.MinimizarCommand;
+import Factory.AvisoFactory;
 import Modelo.Conexion;
 import Modelo.DAO.RegistroLibrosDAO;
 import Modelo.Libro;
@@ -34,8 +37,8 @@ public class ControladorRegistroLibros {
     public void iniciarMenuRegistroLibros() {
         JTextField[] txf = {ventanaRegistroLibro.txf_codigo, ventanaRegistroLibro.txf_tituloLibro, ventanaRegistroLibro.txf_autor, ventanaRegistroLibro.txf_genero, ventanaRegistroLibro.txf_copias, ventanaRegistroLibro.txf_edicion};
         JTextField[] txfs = {ventanaRegistroLibro.txf_codigo, ventanaRegistroLibro.txf_tituloLibro, ventanaRegistroLibro.txf_autor, ventanaRegistroLibro.txf_genero, ventanaRegistroLibro.txf_copias, ventanaRegistroLibro.txf_edicion, ventanaRegistroLibro.txf_buscador};
-        JButton[]btn = {ventanaRegistroLibro.btn_agregar,ventanaRegistroLibro.btn_eliminar,ventanaRegistroLibro.btn_modificar};
-      
+        JButton[] btn = {ventanaRegistroLibro.btn_agregar, ventanaRegistroLibro.btn_eliminar, ventanaRegistroLibro.btn_modificar};
+
         new Personalizacion(ventanaRegistroLibro, ventanaRegistroLibro.pn_toolbar, txfs, btn, ventanaRegistroLibro.tbl_tablaLibro);
         ventanaRegistroLibro.setVisible(true);
 
@@ -81,7 +84,9 @@ public class ControladorRegistroLibros {
                     if (comprobarCasillas(txf)) {
                         if (rldao.registroLibro(verificarFormulario(lib, txf))) {
                             actualizarRegistros(rldao.recojerLibros());
-                            Aviso a = new Aviso(ventanaRegistroLibro, true, "Dato registrado correctamente");
+
+                            //Factory
+                            Aviso a = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "OK");
                             a.setVisible(true);
                             refrescarFormulario(txf);
                         }
@@ -96,7 +101,9 @@ public class ControladorRegistroLibros {
                 if (comprobarSeleccion()) {
                     if (rldao.modificarLibro(new Libro(ventanaRegistroLibro.txf_codigo.getText(), ventanaRegistroLibro.txf_tituloLibro.getText(), ventanaRegistroLibro.txf_autor.getText(), ventanaRegistroLibro.txf_genero.getText(), Integer.parseInt(ventanaRegistroLibro.txf_copias.getText()), ventanaRegistroLibro.txf_edicion.getText()), ventanaRegistroLibro.txf_codigo.getText())) {
                         actualizarRegistros(rldao.recojerLibros());
-                        Aviso a = new Aviso(ventanaRegistroLibro, true, "Dato modificado correctamente");
+
+                        //Factory
+                        Aviso a = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "MODIFICADO");
                         a.setVisible(true);
                         refrescarFormulario(txf);
                     }
@@ -110,7 +117,9 @@ public class ControladorRegistroLibros {
                 if (comprobarSeleccion()) {
                     if (rldao.eliminarLibro((String) ventanaRegistroLibro.tbl_tablaLibro.getValueAt(ventanaRegistroLibro.tbl_tablaLibro.getSelectedRow(), 0))) {
                         actualizarRegistros(rldao.recojerLibros());
-                        Aviso a = new Aviso(ventanaRegistroLibro, true, "Dato eliminado correctamente");
+
+                        //Factory
+                        Aviso a = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "ELIMINADO");
                         a.setVisible(true);
                         refrescarFormulario(txf);
                     }
@@ -130,17 +139,14 @@ public class ControladorRegistroLibros {
         ventanaRegistroLibro.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Conexion.cerrarConexion();
-                ventanaRegistroLibro.dispose();
-                ControladorLogin cl = new ControladorLogin(new Login());
-                cl.iniciarLogin();
+                new CerrarCommand(ventanaRegistroLibro).execute();
             }
         });
 
         ventanaRegistroLibro.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaRegistroLibro.setState(JFrame.ICONIFIED);
+                new MinimizarCommand(ventanaRegistroLibro).execute();
             }
         });
     }
@@ -150,7 +156,9 @@ public class ControladorRegistroLibros {
         if (filaElgda >= 0) {
             return true;
         } else {
-            Aviso a = new Aviso(ventanaRegistroLibro, true, "Seleccione un registro");
+
+            //Factory   
+            Aviso a = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "SELECCIONE");
             a.setVisible(true);
             return false;
         }
@@ -163,7 +171,8 @@ public class ControladorRegistroLibros {
             return a;
         } catch (NumberFormatException e) {
             if (a == null) {
-                Aviso v = new Aviso(ventanaRegistroLibro, true, "Complete el formulario correctamente.");
+                //Factory
+                Aviso v = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "XFORM");
                 v.setVisible(true);
             }
             return a;
@@ -175,7 +184,7 @@ public class ControladorRegistroLibros {
         int i = 0;
         while (acceso) {
             if (txf[i].getText().trim().isEmpty()) {
-                Aviso a = new Aviso(ventanaRegistroLibro, true, "Complete los casilleros");
+                Aviso a = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "VACIO");
                 a.setVisible(true);
                 acceso = false;
             }
@@ -208,9 +217,12 @@ public class ControladorRegistroLibros {
     public boolean verificarCodigoDuplicado(LinkedList<Libro> lista, String codigo) {
         for (int i = 0; i < lista.size(); i++) {
             if (codigo.equalsIgnoreCase(lista.get(i).getCodigoLibro())) {
-                Aviso v = new Aviso(ventanaRegistroLibro, true, "Codigo ya existente");
+
+                //Factory
+                Aviso v = AvisoFactory.crearAviso(ventanaRegistroLibro, true, "DUPLICADO");
                 v.setVisible(true);
                 return false;
+
             }
         }
         return true;

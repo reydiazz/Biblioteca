@@ -1,5 +1,7 @@
 package Controlador;
 
+import Command.MinimizarCommand;
+import Factory.AvisoFactory;
 import Modelo.Conexion;
 import Modelo.Personalizacion;
 import Vista.Aviso;
@@ -21,12 +23,12 @@ public class ControladorLogin {
     }
 
     public void iniciarLogin() {
-        
-        JTextField [] campos = {ventanaLogin.txf_usuario,ventanaLogin.txf_contraseña};
-        JButton [] botones = {ventanaLogin.btn_acceder};
-        
-        new Personalizacion(ventanaLogin, ventanaLogin.pn_toolbar,campos,botones);
-        
+
+        JTextField[] campos = {ventanaLogin.txf_usuario, ventanaLogin.txf_contraseña};
+        JButton[] botones = {ventanaLogin.btn_acceder};
+
+        new Personalizacion(ventanaLogin, ventanaLogin.pn_toolbar, campos, botones);
+
         ventanaLogin.setVisible(true);
 
         ventanaLogin.btn_acceder.addMouseListener(new MouseAdapter() {
@@ -36,13 +38,13 @@ public class ControladorLogin {
                 Conexion.contraseña = new String(ventanaLogin.txf_contraseña.getPassword());
                 Conexion.getConexion();
                 if (Conexion.getAcceso()) {
-                    a = new Aviso(ventanaLogin, true, "Acceso concedido");
+                    a = AvisoFactory.crearAviso(ventanaLogin, true, "ACCESO_OK");
                     a.setVisible(true);
                     ventanaLogin.dispose();
                     ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
                     m.iniciarMenuPrincipal();
                 } else {
-                    a = new Aviso(ventanaLogin, true, "Acceso denegado");
+                    a = AvisoFactory.crearAviso(ventanaLogin, true, "ACCESO_DENEGADO");
                     a.setVisible(true);
                 }
             }
@@ -59,7 +61,7 @@ public class ControladorLogin {
         ventanaLogin.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaLogin.setState(JFrame.ICONIFIED);
+                new MinimizarCommand(ventanaLogin).execute();
             }
         });
 

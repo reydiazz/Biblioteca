@@ -1,5 +1,8 @@
 package Controlador;
 
+import Command.CerrarCommand;
+import Command.MinimizarCommand;
+import Factory.AvisoFactory;
 import Modelo.Alumno;
 import Modelo.Conexion;
 import Modelo.DAO.RegistrarAlumnoDAO;
@@ -84,7 +87,9 @@ public class ControladorRegistrarAlumno {
                     if (comprobarCasillas(txf)) {
                         if (r.registrarAlumno(verificarFormulario(a, txf))) {
                             actualizarRegistros(r.recojerAlumnos());
-                            Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato registrado correctamente");
+
+                            // Factory
+                            Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "OK");
                             a.setVisible(true);
                             refrescarFormulario(txf);
                         }
@@ -100,7 +105,9 @@ public class ControladorRegistrarAlumno {
                 if (comprobarSeleccion()) {
                     if (r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txf_codigo.getText(), ventanaRegistrarAlumno.txf_nombre.getText(), ventanaRegistrarAlumno.txf_apellido.getText(), ventanaRegistrarAlumno.txf_nivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText()), ventanaRegistrarAlumno.txf_seccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
                         actualizarRegistros(r.recojerAlumnos());
-                        Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato modificado correctamente");
+
+                        // Factory
+                        Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "MODIFICADO");
                         a.setVisible(true);
                         refrescarFormulario(txf);
                     }
@@ -114,7 +121,9 @@ public class ControladorRegistrarAlumno {
                 if (comprobarSeleccion()) {
                     if (r.eliminarAlumno((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
                         actualizarRegistros(r.recojerAlumnos());
-                        Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Dato eliminado correctamente");
+
+                        //Factory
+                        Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "ELIMINADO");
                         a.setVisible(true);
                         refrescarFormulario(txf);
                     }
@@ -134,17 +143,14 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Conexion.cerrarConexion();
-                ventanaRegistrarAlumno.dispose();
-                ControladorLogin cl = new ControladorLogin(new Login());
-                cl.iniciarLogin();
+                new CerrarCommand(ventanaRegistrarAlumno).execute();
             }
         });
 
         ventanaRegistrarAlumno.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaRegistrarAlumno.setState(JFrame.ICONIFIED);
+                new MinimizarCommand(ventanaRegistrarAlumno).execute();
             }
         });
     }
@@ -154,7 +160,9 @@ public class ControladorRegistrarAlumno {
         if (filaElgda >= 0) {
             return true;
         } else {
-            Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Seleccione un registro");
+
+            //Factory
+            Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "SELECCIONE");
             a.setVisible(true);
             return false;
         }
@@ -167,7 +175,9 @@ public class ControladorRegistrarAlumno {
             return a;
         } catch (NumberFormatException e) {
             if (a == null) {
-                Aviso v = new Aviso(ventanaRegistrarAlumno, true, "Complete el formulario correctamente.");
+
+                //Factory
+                Aviso v = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "XFORM");
                 v.setVisible(true);
             }
             return a;
@@ -179,7 +189,9 @@ public class ControladorRegistrarAlumno {
         int i = 0;
         while (acceso) {
             if (txf[i].getText().trim().isEmpty()) {
-                Aviso a = new Aviso(ventanaRegistrarAlumno, true, "Complete los casilleros");
+
+                //Factory
+                Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "VACIO");
                 a.setVisible(true);
                 acceso = false;
             }
@@ -212,7 +224,7 @@ public class ControladorRegistrarAlumno {
     public boolean verificarCodigoDuplicado(LinkedList<Alumno> lista, String codigo) {
         for (int i = 0; i < lista.size(); i++) {
             if (codigo.equalsIgnoreCase(lista.get(i).getCodigoAlumno())) {
-                Aviso v = new Aviso(ventanaRegistrarAlumno, true, "Codigo ya existente");
+                Aviso v = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "DUPLICADO");
                 v.setVisible(true);
                 return false;
             }
