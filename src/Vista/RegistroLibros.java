@@ -37,7 +37,7 @@ public class RegistroLibros extends javax.swing.JFrame {
         btn_regresar = new javax.swing.JLabel();
         js_tablaLibro = new javax.swing.JScrollPane();
         tbl_tablaLibro = new javax.swing.JTable();
-        txf_buscador = new javax.swing.JTextField();
+        txf_buscar = new javax.swing.JTextField();
         lbl_iconoBuscador = new javax.swing.JLabel();
         lbl_imagenLibro = new javax.swing.JLabel();
         pn_toolbar = new javax.swing.JPanel();
@@ -164,8 +164,8 @@ public class RegistroLibros extends javax.swing.JFrame {
 
         pn_principal.add(js_tablaLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 840, 390));
 
-        txf_buscador.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        pn_principal.add(txf_buscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 230, 40));
+        txf_buscar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_principal.add(txf_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 230, 40));
 
         lbl_iconoBuscador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/IMAGEN_BUSCAR.png"))); // NOI18N
         pn_principal.add(lbl_iconoBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 180, -1, 60));
@@ -221,7 +221,7 @@ public class RegistroLibros extends javax.swing.JFrame {
     public javax.swing.JPanel pn_toolbar;
     public javax.swing.JTable tbl_tablaLibro;
     public javax.swing.JTextField txf_autor;
-    public javax.swing.JTextField txf_buscador;
+    public javax.swing.JTextField txf_buscar;
     public javax.swing.JTextField txf_codigo;
     public javax.swing.JTextField txf_copias;
     public javax.swing.JTextField txf_edicion;

@@ -1,15 +1,16 @@
 package Modelo;
 
-public class Alumno {
-    
+public class Alumno extends Entidad {
+
     private String codigoAlumno;
     private String nombre;
     private String apellidoPaterno;
     private String nivel;
     private int grado;
-    private char seccion; 
-    
-    public Alumno(String codigoAlumno, String nombre, String apellidoPaterno, String nivel, int grado, char seccion){
+    private char seccion;
+
+    public Alumno(String codigoAlumno, String nombre, String apellidoPaterno, String nivel, int grado, char seccion) {
+        super(codigoAlumno);
         this.codigoAlumno = codigoAlumno;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;

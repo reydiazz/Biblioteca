@@ -33,7 +33,7 @@ public class RegistrarAlumno extends javax.swing.JFrame {
         txf_nombre = new javax.swing.JTextField();
         js_tablaAlumnos = new javax.swing.JScrollPane();
         tbl_tablaAlumnos = new javax.swing.JTable();
-        txf_buscador = new javax.swing.JTextField();
+        txf_buscar = new javax.swing.JTextField();
         btn_regresar = new javax.swing.JLabel();
         lbl_imagenAlumnos = new javax.swing.JLabel();
         lbl_iconoBuscador = new javax.swing.JLabel();
@@ -140,8 +140,8 @@ public class RegistrarAlumno extends javax.swing.JFrame {
 
         pn_principal.add(js_tablaAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 840, 380));
 
-        txf_buscador.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        pn_principal.add(txf_buscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 230, 40));
+        txf_buscar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        pn_principal.add(txf_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 230, 40));
 
         btn_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_HOME.png"))); // NOI18N
         pn_principal.add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 70, 60));
@@ -220,7 +220,7 @@ public class RegistrarAlumno extends javax.swing.JFrame {
     public javax.swing.JPanel pn_toolbar;
     public javax.swing.JTable tbl_tablaAlumnos;
     public javax.swing.JTextField txf_apellido;
-    public javax.swing.JTextField txf_buscador;
+    public javax.swing.JTextField txf_buscar;
     public javax.swing.JTextField txf_codigo;
     public javax.swing.JTextField txf_grado;
     public javax.swing.JTextField txf_nivel;

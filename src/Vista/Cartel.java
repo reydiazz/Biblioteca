@@ -1,22 +1,32 @@
 package Vista;
 
+import Fabrica.Aviso;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Frame;
 import javax.swing.ButtonModel;
+import javax.swing.JDialog;
 
-public class Aviso extends javax.swing.JDialog {
+public class Cartel extends JDialog implements Aviso {
 
-    int xMouse;
-    int yMouse;
+    private final String TITULO = "Atencion";
 
-    public Aviso(java.awt.Frame parent, boolean modal, String titulo) {
-        super(parent, modal);
+    private int xMouse;
+    private int yMouse;
+
+    public Cartel(Frame ventana, String mensaje) {
+        super(ventana, true);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        lbl_titulo.setText(titulo);
+        lbl_titulo.setText(mensaje);
         personalizarBoton(btn_entendido);
-        setTitle("Atencion");
+        setTitle(TITULO);
+    }
+
+    @Override
+    public void mostrar() {
+        setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,11 +60,6 @@ public class Aviso extends javax.swing.JDialog {
         btn_entendido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ICONO_ENTENDIDO.png"))); // NOI18N
         btn_entendido.setText("ENTENDIDO");
         btn_entendido.setBorder(null);
-        btn_entendido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_entendidoActionPerformed(evt);
-            }
-        });
         pn_principal.add(btn_entendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 170, 40));
 
         pn_toolbar.setBackground(new java.awt.Color(204, 51, 0));
@@ -72,7 +77,7 @@ public class Aviso extends javax.swing.JDialog {
 
         lbl_ventana.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         lbl_ventana.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_ventana.setText("Atencion");
+        lbl_ventana.setText("Atención");
         pn_toolbar.add(lbl_ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 40));
 
         pn_principal.add(pn_toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 40));
@@ -82,36 +87,27 @@ public class Aviso extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_entendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entendidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_entendidoActionPerformed
-
     private void pn_toolbarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMouseDragged
-        // Obtenemos las coordenadas actuales del raton en la pantalla.
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        // Calculamos la nueva posición del JFrame restando la posición inicial del mouse.
         int deltaX = x - xMouse;
         int deltaY = y - yMouse;
-        // Movemos el JFrame a la nueva posición.
         setLocation(getX() + deltaX, getY() + deltaY);
-        // Actualizamos las coordenadas del mouse para el siguiente movimiento.
         xMouse = x;
         yMouse = y;
     }//GEN-LAST:event_pn_toolbarMouseDragged
 
     private void pn_toolbarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_toolbarMousePressed
-
         xMouse = evt.getXOnScreen();
         yMouse = evt.getYOnScreen();
     }//GEN-LAST:event_pn_toolbarMousePressed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_entendido;
+    public javax.swing.JButton btn_entendido;
     public javax.swing.JLabel lbl_titulo;
-    private javax.swing.JLabel lbl_ventana;
-    private javax.swing.JPanel pn_principal;
+    public javax.swing.JLabel lbl_ventana;
+    public javax.swing.JPanel pn_principal;
     public javax.swing.JPanel pn_toolbar;
     // End of variables declaration//GEN-END:variables
 

@@ -1,17 +1,16 @@
 package Controlador;
 
-import Command.CerrarCommand;
-import Command.MinimizarCommand;
-import Modelo.Conexion;
-import Modelo.Personalizacion;
+import Commando.CerrarComando;
+import Commando.Comando;
+import Commando.MinimizarCommando;
+import Modelo.Ventana;
+import Fachada.EstiloFachada;
 import Vista.DevolucionLibros;
-import Vista.Login;
 import Vista.MenuPrincipal;
 import Vista.PrestamosLibros;
 import Vista.RegistrarAlumno;
 import Vista.RegistroLibros;
 import java.awt.event.*;
-import javax.swing.JFrame;
 
 public class ControladorMenuPrincipal {
 
@@ -23,7 +22,10 @@ public class ControladorMenuPrincipal {
 
     public void iniciarMenuPrincipal() {
 
-        new Personalizacion(ventanaMenuPrincipal, ventanaMenuPrincipal.pn_toolbar);
+        Comando cmdMinimizarVentana = new MinimizarCommando(new Ventana(ventanaMenuPrincipal));
+        Comando cmdCerrarVentana = new CerrarComando(new Ventana(ventanaMenuPrincipal));
+
+        EstiloFachada.aplicarFuncionesToolBar(ventanaMenuPrincipal, ventanaMenuPrincipal.pn_toolbar);
 
         ventanaMenuPrincipal.setVisible(true);
 
@@ -63,34 +65,17 @@ public class ControladorMenuPrincipal {
             }
         });
 
-        /*ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Conexion.cerrarConexion();
-                ventanaMenuPrincipal.dispose();
-                ControladorLogin cl = new ControladorLogin(new Login());
-                cl.iniciarLogin();
-            }
-        });
-
-        ventanaMenuPrincipal.btn_minimizar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                ventanaMenuPrincipal.setState(JFrame.ICONIFIED);
-            }
-        }); */
-        
         ventanaMenuPrincipal.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new CerrarCommand(ventanaMenuPrincipal).execute();
+                cmdCerrarVentana.execute();
             }
         });
 
         ventanaMenuPrincipal.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new MinimizarCommand(ventanaMenuPrincipal).execute();
+                cmdMinimizarVentana.execute();
             }
         });
 

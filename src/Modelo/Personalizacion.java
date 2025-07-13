@@ -36,7 +36,7 @@ public class Personalizacion {
         }
 
         aplicarFuncionesToolBar(ventana, toolbar);
-        
+
         personalizarTable(tbl);
     }
 

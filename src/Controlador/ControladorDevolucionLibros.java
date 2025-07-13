@@ -1,100 +1,59 @@
 package Controlador;
 
-import Command.CerrarCommand;
-import Command.MinimizarCommand;
-import Factory.AvisoFactory;
+import Commando.CerrarComando;
+import Commando.MinimizarCommando;
+import Modelo.Ventana;
 import Modelo.Conexion;
 import Modelo.DAO.DevolucionLibrosDAO;
-import Modelo.Personalizacion;
 import Modelo.Prestamo;
-import Vista.Aviso;
 import Vista.DevolucionLibros;
-import Vista.Login;
-import Vista.MenuPrincipal;
 import java.awt.event.*;
 import java.util.LinkedList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import Commando.Comando;
+import Commando.RegresarCommando;
+import Fabrica.AvisoFabrica;
+import Fachada.EstiloFachada;
+import Fachada.ValidacionesUIFachada;
 
 public class ControladorDevolucionLibros {
 
     private final DevolucionLibros ventanaDevolucionLibros;
-    private DevolucionLibrosDAO pa;
+    private DevolucionLibrosDAO dao;
 
     public ControladorDevolucionLibros(DevolucionLibros ventanaDevolucionLibros) {
         this.ventanaDevolucionLibros = ventanaDevolucionLibros;
-        pa = new DevolucionLibrosDAO(Conexion.getConexion());
+        dao = new DevolucionLibrosDAO(Conexion.getConexion());
     }
 
     public void iniciarMenuDevolucionLibros() {
-
-        JButton[] btns = {ventanaDevolucionLibros.btn_devolverLibro};
-        JTextField[] txf = {ventanaDevolucionLibros.txf_buscar};
-
-        new Personalizacion(ventanaDevolucionLibros, ventanaDevolucionLibros.pn_toolbar, txf, btns, ventanaDevolucionLibros.tbl_tablaDevolucion);
-
         ventanaDevolucionLibros.setVisible(true);
-        actualizarRegistros(pa.recojerPrestamos());
 
-        ventanaDevolucionLibros.btn_regresar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                ventanaDevolucionLibros.dispose();
-                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
-                m.iniciarMenuPrincipal();
-            }
-        });
+        Comando cmdMinimizarVentana = new MinimizarCommando(new Ventana(ventanaDevolucionLibros));
+        Comando cmdCerrarVentana = new CerrarComando(new Ventana(ventanaDevolucionLibros));
+        Comando cmdRegresarComando = new RegresarCommando(new Ventana(ventanaDevolucionLibros));
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaDevolucionLibros.tbl_tablaDevolucion.getModel());
-        ventanaDevolucionLibros.tbl_tablaDevolucion.setRowSorter(sorter);
+        EstiloFachada.aplicarEstiloGlobal(ventanaDevolucionLibros.getContentPane());
+        EstiloFachada.aplicarFuncionesToolBar(ventanaDevolucionLibros, ventanaDevolucionLibros.pn_toolbar);
+        EstiloFachada.filtrarTabla(ventanaDevolucionLibros.tbl_tablaDevolucion, ventanaDevolucionLibros.txf_buscar);
 
-        ventanaDevolucionLibros.txf_buscar.getDocument().addDocumentListener(new DocumentListener() {
-            public void insertUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            public void removeUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            public void changedUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            private void filtrar() {
-                String texto = ventanaDevolucionLibros.txf_buscar.getText();
-                if (texto.trim().length() == 0) {
-                    sorter.setRowFilter(null);
-                } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto, 1));
-                }
-            }
-        });
+        actualizarRegistrosDevolucion(dao.recojerPrestamos());
 
         ventanaDevolucionLibros.btn_devolverLibro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!comprobarSeleccion()) {
-                    return;
-                }
                 int fila = ventanaDevolucionLibros.tbl_tablaDevolucion.getSelectedRow();
-                String codigoLibro = String.valueOf(
-                        ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 0));
-                String codigoAlumno = String.valueOf(
-                        ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 2));
-                boolean actualizado = pa.actualizarDevolverLibro(codigoAlumno, codigoLibro);
-                boolean eliminado = actualizado && pa.eliminarRegistroDevolucionLibro(codigoAlumno, codigoLibro);
-                if (actualizado && eliminado) {
-                    actualizarRegistros(pa.recojerPrestamos());
-                    AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "DEVUELTO").setVisible(true);
+                if (ValidacionesUIFachada.comprobarSeleccion(fila)) {
+                    String codigoLibro = String.valueOf(ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 0));
+                    String codigoAlumno = String.valueOf(ventanaDevolucionLibros.tbl_tablaDevolucion.getValueAt(fila, 2));
+                    if (dao.actualizarDevolverLibro(codigoAlumno, codigoLibro)) {
+                        AvisoFabrica.crearAviso(ventanaDevolucionLibros, "Libro devuelto correctamente.").mostrar();
+                        actualizarRegistrosDevolucion(dao.recojerPrestamos());
+                    } else {
+                        AvisoFabrica.crearAviso(ventanaDevolucionLibros, "Error al devolver el libro.").mostrar();
+                    }
                 } else {
-                    AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "NO_DEVUELTO").setVisible(true);
+                    AvisoFabrica.crearAviso(ventanaDevolucionLibros, "Seleccione un registro.").mostrar();
                 }
             }
         });
@@ -102,19 +61,26 @@ public class ControladorDevolucionLibros {
         ventanaDevolucionLibros.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new CerrarCommand(ventanaDevolucionLibros).execute();
+                cmdCerrarVentana.execute();
             }
         });
 
         ventanaDevolucionLibros.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new MinimizarCommand(ventanaDevolucionLibros).execute();
+                cmdMinimizarVentana.execute();
+            }
+        });
+
+        ventanaDevolucionLibros.btn_regresar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cmdRegresarComando.execute();
             }
         });
     }
 
-    public void actualizarRegistros(LinkedList<Prestamo> lista) {
+    public void actualizarRegistrosDevolucion(LinkedList<Prestamo> lista) {
         DefaultTableModel modelo = (DefaultTableModel) ventanaDevolucionLibros.tbl_tablaDevolucion.getModel();
         String datos[] = new String[5];
         modelo.setRowCount(0);
@@ -130,14 +96,4 @@ public class ControladorDevolucionLibros {
         }
     }
 
-    public boolean comprobarSeleccion() {
-        int filaElgda = ventanaDevolucionLibros.tbl_tablaDevolucion.getSelectedRow();
-        if (filaElgda >= 0) {
-            return true;
-        } else {
-            Aviso a = AvisoFactory.crearAviso(ventanaDevolucionLibros, true, "SELECCIONE");
-            a.setVisible(true);
-            return false;
-        }
-    }
 }

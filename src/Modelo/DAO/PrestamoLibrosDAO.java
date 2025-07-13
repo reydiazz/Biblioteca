@@ -1,6 +1,5 @@
 package Modelo.DAO;
 
-import Modelo.Libro;
 import Modelo.Prestamo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

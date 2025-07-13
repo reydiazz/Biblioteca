@@ -1,7 +1,7 @@
-
 package Modelo;
 
-public class Libro {
+public class Libro extends Entidad {
+
     private String codigoLibro;
     private String titulo;
     private String autor;
@@ -10,6 +10,7 @@ public class Libro {
     private String edicion;
 
     public Libro(String codigoLibro, String titulo, String autor, String genero, int numeroCopias, String edicion) {
+        super(codigoLibro);
         this.codigoLibro = codigoLibro;
         this.titulo = titulo;
         this.autor = autor;
@@ -17,7 +18,7 @@ public class Libro {
         this.numeroCopias = numeroCopias;
         this.edicion = edicion;
     }
-    
+
     public String getCodigoLibro() {
         return codigoLibro;
     }
@@ -65,10 +66,10 @@ public class Libro {
     public void setEdicion(String edicion) {
         this.edicion = edicion;
     }
-    
+
     @Override
     public String toString() {
         return codigoLibro + " " + titulo;
     }
-    
+
 }

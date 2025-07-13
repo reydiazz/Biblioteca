@@ -1,13 +1,11 @@
 package Modelo;
 
-import java.util.ArrayList;
 import java.sql.Date;
 
 public class Prestamo {
 
     private String nombreAlumno;
     private String nombreLibro;
-
 
     private String codigoLibro;
     private String codigoAlumno;

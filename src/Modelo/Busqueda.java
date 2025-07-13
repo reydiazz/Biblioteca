@@ -1,10 +1,10 @@
 package Modelo;
 
 public class Busqueda {
-    
+
     private Libro libroEncontrado;
-    
-    public Busqueda(Libro libroEncontrado){
+
+    public Busqueda(Libro libroEncontrado) {
         this.libroEncontrado = libroEncontrado;
     }
 
@@ -15,5 +15,5 @@ public class Busqueda {
     public void setLibroEncontrado(Libro libroEncontrado) {
         this.libroEncontrado = libroEncontrado;
     }
-    
+
 }

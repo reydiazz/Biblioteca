@@ -1,99 +1,81 @@
 package Controlador;
 
-import Command.CerrarCommand;
-import Command.MinimizarCommand;
-import Factory.AvisoFactory;
+import Commando.CerrarComando;
+import Commando.Comando;
+import Commando.MinimizarCommando;
+import Commando.RegresarCommando;
+import Modelo.Ventana;
+import Fabrica.AvisoFabrica;
+import Fachada.EstiloFachada;
+import Fachada.ValidacionesUIFachada;
 import Modelo.Alumno;
 import Modelo.Conexion;
 import Modelo.DAO.RegistrarAlumnoDAO;
-import Modelo.Personalizacion;
-import Vista.Aviso;
-import Vista.Login;
-import Vista.MenuPrincipal;
 import Vista.RegistrarAlumno;
+import java.awt.Component;
 import java.awt.event.*;
 import java.util.LinkedList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.util.Set;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class ControladorRegistrarAlumno {
 
     private final RegistrarAlumno ventanaRegistrarAlumno;
-    private RegistrarAlumnoDAO r;
-    private Alumno a;
+    private RegistrarAlumnoDAO dao;
 
     public ControladorRegistrarAlumno(RegistrarAlumno ventanaRegistrarAlumno) {
         this.ventanaRegistrarAlumno = ventanaRegistrarAlumno;
-        r = new RegistrarAlumnoDAO(Conexion.getConexion());
+        dao = new RegistrarAlumnoDAO(Conexion.getConexion());
     }
 
     public void iniciarMenuRegistrarAlumno() {
-        JButton[] btn = {ventanaRegistrarAlumno.btn_eliminar, ventanaRegistrarAlumno.btn_modificar, ventanaRegistrarAlumno.btn_registrar};
+        Comando cmdMinimizarVentana = new MinimizarCommando(new Ventana(ventanaRegistrarAlumno));
+        Comando cmdCerrarVentana = new CerrarComando(new Ventana(ventanaRegistrarAlumno));
+        Comando cmdRegresarComando = new RegresarCommando(new Ventana(ventanaRegistrarAlumno));
+
         JTextField[] txf = {ventanaRegistrarAlumno.txf_codigo, ventanaRegistrarAlumno.txf_nombre, ventanaRegistrarAlumno.txf_apellido, ventanaRegistrarAlumno.txf_nivel, ventanaRegistrarAlumno.txf_grado, ventanaRegistrarAlumno.txf_seccion};
 
-        JTextField[] txfs = {ventanaRegistrarAlumno.txf_codigo, ventanaRegistrarAlumno.txf_nombre, ventanaRegistrarAlumno.txf_apellido, ventanaRegistrarAlumno.txf_nivel, ventanaRegistrarAlumno.txf_grado, ventanaRegistrarAlumno.txf_seccion, ventanaRegistrarAlumno.txf_buscador};
-
-        new Personalizacion(ventanaRegistrarAlumno, ventanaRegistrarAlumno.pn_toolbar, txfs, btn, ventanaRegistrarAlumno.tbl_tablaAlumnos);
+        EstiloFachada.aplicarEstiloGlobal(ventanaRegistrarAlumno.getContentPane());
+        EstiloFachada.aplicarFuncionesToolBar(ventanaRegistrarAlumno, ventanaRegistrarAlumno.pn_toolbar);
+        EstiloFachada.filtrarTabla(ventanaRegistrarAlumno.tbl_tablaAlumnos, ventanaRegistrarAlumno.txf_buscar);
 
         ventanaRegistrarAlumno.setVisible(true);
 
-        actualizarRegistros(r.recojerAlumnos());
-
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(ventanaRegistrarAlumno.tbl_tablaAlumnos.getModel());
-        ventanaRegistrarAlumno.tbl_tablaAlumnos.setRowSorter(sorter);
-
-        ventanaRegistrarAlumno.txf_buscador.getDocument().addDocumentListener(new DocumentListener() {
-            public void insertUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            public void removeUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            public void changedUpdate(DocumentEvent e) {
-                filtrar();
-            }
-
-            private void filtrar() {
-                String texto = ventanaRegistrarAlumno.txf_buscador.getText();
-                if (texto.trim().length() == 0) {
-                    sorter.setRowFilter(null);
-                } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto, 1));
-                }
-            }
-        });
+        actualizarRegistros(dao.recojerAlumnos());
 
         ventanaRegistrarAlumno.tbl_tablaAlumnos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                selecionRegistro(txf);
+                ValidacionesUIFachada.selecionRegistro(txf, ventanaRegistrarAlumno.tbl_tablaAlumnos);
             }
         });
 
         ventanaRegistrarAlumno.btn_registrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
-                if ((verificarCodigoDuplicado(r.recojerAlumnos(), ventanaRegistrarAlumno.txf_codigo.getText()))) {
-                    if (comprobarCasillas(txf)) {
-                        if (r.registrarAlumno(verificarFormulario(a, txf))) {
-                            actualizarRegistros(r.recojerAlumnos());
-
-                            // Factory
-                            Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "OK");
-                            a.setVisible(true);
-                            refrescarFormulario(txf);
+                if (ValidacionesUIFachada.verificarCodigoDuplicado(dao.recojerAlumnos(), ventanaRegistrarAlumno.txf_codigo.getText())) {
+                    Set<Component> excluidos = Set.of(ventanaRegistrarAlumno.txf_buscar);
+                    if (ValidacionesUIFachada.comprobarCasillas(ventanaRegistrarAlumno.getContentPane(), excluidos)) {
+                        if (dao.registrarAlumno(verificarFormulario())) {
+                            actualizarRegistros(dao.recojerAlumnos());
+                            AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Acceso permitido").mostrar();
+                            ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
+                        } else if (verificarFormulario() != null) {
+                            AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Error al ingresar el dato.").mostrar();
+                            ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
+                        } else if (verificarFormulario() == null) {
+                            AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Verifique el formulario.").mostrar();
+                            ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                         }
+                    } else {
+                        AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Complete el formulario.").mostrar();
+                        ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                     }
+                } else {
+                    System.out.println(ventanaRegistrarAlumno.txf_codigo.getText());
+                    AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Codigo ya existente.").mostrar();
+                    ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                 }
 
             }
@@ -102,15 +84,23 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btn_modificar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (comprobarSeleccion()) {
-                    if (r.modificarAlumno(new Alumno(ventanaRegistrarAlumno.txf_codigo.getText(), ventanaRegistrarAlumno.txf_nombre.getText(), ventanaRegistrarAlumno.txf_apellido.getText(), ventanaRegistrarAlumno.txf_nivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText()), ventanaRegistrarAlumno.txf_seccion.getText().charAt(0)), (String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
-                        actualizarRegistros(r.recojerAlumnos());
-
-                        // Factory
-                        Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "MODIFICADO");
-                        a.setVisible(true);
-                        refrescarFormulario(txf);
+                int fila = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
+                if (ValidacionesUIFachada.comprobarSeleccion(fila)) {
+                    Set<Component> excluidos = Set.of(ventanaRegistrarAlumno.txf_buscar);
+                    if (ValidacionesUIFachada.comprobarCasillas(ventanaRegistrarAlumno.getContentPane(), excluidos)) {
+                        String codigoAntiguo = String.valueOf(ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(fila, 0));
+                        if (dao.modificarAlumno(verificarFormulario(), codigoAntiguo)) {
+                            actualizarRegistros(dao.recojerAlumnos());
+                            AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Dato modificado correctamente.").mostrar();
+                            ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
+                        }
+                    } else {
+                        AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Complete el formulario.").mostrar();
+                        ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                     }
+                } else {
+                    AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Seleccione un registro.").mostrar();
+                    ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                 }
             }
         });
@@ -118,15 +108,19 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btn_eliminar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (comprobarSeleccion()) {
-                    if (r.eliminarAlumno((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
-                        actualizarRegistros(r.recojerAlumnos());
-
-                        //Factory
-                        Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "ELIMINADO");
-                        a.setVisible(true);
-                        refrescarFormulario(txf);
+                int fila = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
+                if (ValidacionesUIFachada.comprobarSeleccion(fila)) {
+                    if (dao.eliminarAlumno((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow(), 0))) {
+                        actualizarRegistros(dao.recojerAlumnos());
+                        AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Dato eliminado correctamente.").mostrar();
+                        ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
+                    } else {
+                        AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Alumno en uso.").mostrar();
+                        ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                     }
+                } else {
+                    AvisoFabrica.crearAviso(ventanaRegistrarAlumno, "Seleccione un registro.").mostrar();
+                    ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
                 }
             }
         });
@@ -134,74 +128,42 @@ public class ControladorRegistrarAlumno {
         ventanaRegistrarAlumno.btn_regresar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventanaRegistrarAlumno.dispose();
-                ControladorMenuPrincipal m = new ControladorMenuPrincipal(new MenuPrincipal());
-                m.iniciarMenuPrincipal();
+                cmdRegresarComando.execute();
             }
         });
 
         ventanaRegistrarAlumno.btn_cerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new CerrarCommand(ventanaRegistrarAlumno).execute();
+                cmdCerrarVentana.execute();
             }
         });
 
         ventanaRegistrarAlumno.btn_minimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new MinimizarCommand(ventanaRegistrarAlumno).execute();
+                cmdMinimizarVentana.execute();
             }
         });
     }
 
-    public boolean comprobarSeleccion() {
-        int filaElgda = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
-        if (filaElgda >= 0) {
-            return true;
-        } else {
-
-            //Factory
-            Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "SELECCIONE");
-            a.setVisible(true);
-            return false;
-        }
-    }
-
-    public Alumno verificarFormulario(Alumno a, JTextField[] txf) {
+    public Alumno verificarFormulario() {
         try {
-            a = new Alumno(ventanaRegistrarAlumno.txf_codigo.getText(), ventanaRegistrarAlumno.txf_nombre.getText(), ventanaRegistrarAlumno.txf_apellido.getText(), ventanaRegistrarAlumno.txf_nivel.getText(), Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText()), ventanaRegistrarAlumno.txf_seccion.getText().charAt(0));
-            refrescarFormulario(txf);
-            return a;
+            String codigo = ventanaRegistrarAlumno.txf_codigo.getText().trim();
+            String nombre = ventanaRegistrarAlumno.txf_nombre.getText().trim();
+            String apellido = ventanaRegistrarAlumno.txf_apellido.getText().trim();
+            String nivel = ventanaRegistrarAlumno.txf_nivel.getText().trim();
+            int grado = Integer.parseInt(ventanaRegistrarAlumno.txf_grado.getText().trim());
+            String seccionText = ventanaRegistrarAlumno.txf_seccion.getText().trim();
+            char seccion = seccionText.isEmpty() ? ' ' : seccionText.charAt(0);
+
+            Alumno alumno = new Alumno(codigo, nombre, apellido, nivel, grado, seccion);
+            ValidacionesUIFachada.resetearFormulario(ventanaRegistrarAlumno.getContentPane());
+            return alumno;
+
         } catch (NumberFormatException e) {
-            if (a == null) {
-
-                //Factory
-                Aviso v = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "XFORM");
-                v.setVisible(true);
-            }
-            return a;
+            return null;
         }
-    }
-
-    public boolean comprobarCasillas(JTextField[] txf) {
-        boolean acceso = true;
-        int i = 0;
-        while (acceso) {
-            if (txf[i].getText().trim().isEmpty()) {
-
-                //Factory
-                Aviso a = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "VACIO");
-                a.setVisible(true);
-                acceso = false;
-            }
-            if (txf.length - 1 <= i && acceso != false) {
-                acceso = false;
-            } else {
-                i++;
-            }
-        }
-        return txf.length - 1 == i;
     }
 
     public void actualizarRegistros(LinkedList<Alumno> lista) {
@@ -221,29 +183,4 @@ public class ControladorRegistrarAlumno {
         }
     }
 
-    public boolean verificarCodigoDuplicado(LinkedList<Alumno> lista, String codigo) {
-        for (int i = 0; i < lista.size(); i++) {
-            if (codigo.equalsIgnoreCase(lista.get(i).getCodigoAlumno())) {
-                Aviso v = AvisoFactory.crearAviso(ventanaRegistrarAlumno, true, "DUPLICADO");
-                v.setVisible(true);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void selecionRegistro(JTextField[] txf) {
-        int filaElgda = ventanaRegistrarAlumno.tbl_tablaAlumnos.getSelectedRow();
-        if (filaElgda >= 0) {
-            for (int i = 0; i < txf.length; i++) {
-                txf[i].setText((String) ventanaRegistrarAlumno.tbl_tablaAlumnos.getValueAt(filaElgda, i));
-            }
-        }
-    }
-
-    public void refrescarFormulario(JTextField[] txf) {
-        for (int i = 0; i < txf.length; i++) {
-            txf[i].setText("");
-        }
-    }
 }
